@@ -55,10 +55,10 @@
     "year": 2026,
     "hue": 190,
     "featured": false,
-    "pinned": true,
+    "pinned": false,
     "desc": {
-      "en": "Experimental STM32 flight-controller firmware for a custom ESP-NOW quadcopter: nested attitude/rate PID with self-levelling, GPS position hold and return-to-home, IMU + barometer + magnetometer fusion, arming checks and failsafe landing.",
-      "vi": "Firmware bộ điều khiển bay STM32 cho quadcopter dùng ESP-NOW: PID lồng góc/tốc độ tự cân bằng, giữ vị trí GPS và tự quay về, kết hợp IMU + khí áp kế + la bàn, kiểm tra trước khi bay và hạ cánh an toàn khi mất tín hiệu."
+      "vi": "Firmware bộ điều khiển bay STM32 cho quadcopter dùng ESP-NOW: PID lồng góc/tốc độ tự cân bằng, giữ vị trí GPS và tự quay về, kết hợp IMU + khí áp kế + la bàn, kiểm tra trước khi bay và hạ cánh an toàn khi mất tín hiệu.",
+      "en": "Experimental STM32 flight-controller firmware for a custom ESP-NOW quadcopter: nested attitude/rate PID with self-levelling, GPS position hold and return-to-home, IMU + barometer + magnetometer fusion, arming checks and failsafe landing."
     },
     "tags": [
       "C",
