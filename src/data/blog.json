@@ -1,5 +1,21 @@
 [
   {
+    "id": "mumznu9xba3i",
+    "title": "Mình vẫn cứ thế thoi...",
+    "date": "30/09/2026",
+    "text": "Tâm lạnh như băng...",
+    "images": [
+      "/uploads/minh-van-cu-the-thoi-mumznosr.jpg",
+      "/uploads/minh-van-cu-the-thoi-mumznrd3.jpg"
+    ],
+    "ratios": [
+      1.5,
+      1.5
+    ],
+    "layout": "auto",
+    "fit": "cover"
+  },
+  {
     "id": "mumzlrrfmyzw",
     "title": "1 Ngày hội thảo tại Nam Định",
     "date": "30/09/2026",
