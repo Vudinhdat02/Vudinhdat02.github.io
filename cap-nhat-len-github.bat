@@ -4,7 +4,10 @@ REM  CAP NHAT WEBSITE LEN MANG  (chay moi khi ban them / sua noi dung tren may)
 REM  Nhan dup vao file nay de chay.
 REM ==========================================================
 cd /d "%~dp0"
-if exist github-config if not exist .github ren github-config .github
+if exist github-config (
+  if not exist ".github\workflows" mkdir ".github\workflows"
+  copy /y "github-config\workflows\deploy.yml" ".github\workflows\deploy.yml" >nul
+)
 set MSG=
 set /p MSG=Noi dung thay doi (vd: Them thanh tich moi) - Enter de bo qua: 
 if "%MSG%"=="" set MSG=Cap nhat website

@@ -16,7 +16,10 @@ if errorlevel 1 (
 )
 
 REM doi ten thu muc cau hinh (Windows khong cho tao ten bat dau bang dau cham tu xa)
-if exist github-config if not exist .github ren github-config .github
+if exist github-config (
+  if not exist ".github\workflows" mkdir ".github\workflows"
+  copy /y "github-config\workflows\deploy.yml" ".github\workflows\deploy.yml" >nul
+)
 if exist vscode-config if not exist .vscode ren vscode-config .vscode
 
 echo.
