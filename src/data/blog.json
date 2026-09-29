@@ -49,7 +49,7 @@
       0.75
     ],
     "layout": "classic",
-    "fit": "cover"
+    "fit": "contain"
   },
   {
     "id": "mumznu9xba3i",
