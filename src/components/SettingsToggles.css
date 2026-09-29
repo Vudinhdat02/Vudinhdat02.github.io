@@ -1,0 +1,14 @@
+.st-lang, .st-theme {
+  display: flex; align-items: center; justify-content: center; gap: 6px; height: 38px;
+  border: 1px solid var(--line); border-radius: 6px; color: var(--text-dim); transition: all .2s;
+  font: 600 13.5px/1 var(--font-mono); letter-spacing: .08em;
+}
+.st-lang { padding: 0 10px; }
+.st-theme { width: 38px; }
+.st-lang:hover, .st-theme:hover { border-color: var(--line-strong); color: var(--text-strong); }
+.st-lang span { opacity: .45; transition: opacity .2s, color .2s; }
+.st-lang span.on { opacity: 1; color: var(--cyan); }
+.st-lang i { width: 1px; height: 12px; background: var(--line-strong); }
+@media (max-width: 760px) {
+  .st-lang, .st-theme { height: var(--tap); min-width: var(--tap); }
+}

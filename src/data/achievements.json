@@ -1,0 +1,137 @@
+[
+  {
+    "id": "mums91zkcnk1",
+    "title": "Tốt nghiệp Trung cấp",
+    "date": "2019 - 2021",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "Chuyên nghành: Điện tử công nghiệp",
+    "image": "/uploads/tot-nghiep-trung-cap-mums91zd.jpg"
+  },
+  {
+    "id": "mumsbc8613gc",
+    "title": "Sinh Viên Xuất Sắc",
+    "date": "2022 - 2023",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "Kết thúc năm nhất ĐH với 2 học bọc KKHT loại xuất sắc",
+    "image": "/uploads/sinh-vien-xuat-sac-mumsbc7t.jpg"
+  },
+  {
+    "id": "mumsdsqbs0ix",
+    "title": "Sinh Viên Xuất Sắc",
+    "date": "2023 - 2024",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "Kết thúc năm 2 ĐH với 1 học bổng KKHT",
+    "image": "/uploads/sinh-vien-xuat-sac-mumsdspk.jpg"
+  },
+  {
+    "id": "mumsfx4dauxk",
+    "title": "Sinh Viên 5 Tốt Cấp Trường",
+    "date": "2024",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "Lần đầu đạt danh hiệu SV5T tại đại học",
+    "image": "/uploads/sinh-vien-5-tot-cap-truong-2023-2024-mumsfx46.jpg"
+  },
+  {
+    "id": "mumshfnvhpvd",
+    "title": "Sinh Viên Xuất Sắc",
+    "date": "2024 - 2025",
+    "category": "Học tập",
+    "featured": true,
+    "desc": "Kết thúc năm ba ĐH với 2 học bọc KKHT loại xuất sắc",
+    "image": "/uploads/sinh-vien-xuat-sac-mumshfn7.jpg"
+  },
+  {
+    "id": "mumsjhukm2lt",
+    "title": "Sinh Viên Tiêu Biểu",
+    "date": "2024 - 2025",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "Sinh viên tiêu biểu khối Đại Học Thái Nguyên năm 2024 - 2025",
+    "image": "/uploads/sinh-vien-tieu-bieu-mumsjhua.jpg"
+  },
+  {
+    "id": "mumsmvt52qpn",
+    "title": "Khen Thưởng Đoàn Thanh Niên",
+    "date": "2024 - 2025",
+    "category": "Hoạt động",
+    "featured": false,
+    "desc": "",
+    "image": "/uploads/khen-thuong-doan-thanh-nien-mumsmvsp.jpg"
+  },
+  {
+    "id": "mumsohjsebuj",
+    "title": "Khen thưởng Hội Sinh Viên",
+    "date": "2023 - 2025",
+    "category": "Hoạt động",
+    "featured": false,
+    "desc": "",
+    "image": "/uploads/khen-thuong-hoi-sinh-vien-mumsohj9.jpg"
+  },
+  {
+    "id": "mumspmycnfbx",
+    "title": "Khen Thưởng Hội Sinh Viên ĐHTN",
+    "date": "2025 - 2026",
+    "category": "Hoạt động",
+    "featured": false,
+    "desc": "",
+    "image": "/uploads/khen-thuong-hoi-sinh-vien-dhtn-mumspmxa.jpg"
+  },
+  {
+    "id": "mumsqsznzprb",
+    "title": "Sinh Viên Khỏe",
+    "date": "2024 - 2025",
+    "category": "Hoạt động",
+    "featured": false,
+    "desc": "",
+    "image": "/uploads/sinh-vien-khoe-mumsqsz7.jpg"
+  },
+  {
+    "id": "mumsrsqj4b7n",
+    "title": "Sinh Viên 5 Tốt Cấp Trường",
+    "date": "2024 - 2025",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "",
+    "image": "/uploads/sinh-vien-5-tot-cap-truong-mumsrspx.jpg"
+  },
+  {
+    "id": "mumssdv2yk4n",
+    "title": "Sinh Viên 5 Tốt Cấp ĐHTN",
+    "date": "2024 - 2025",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "",
+    "image": "/uploads/sinh-vien-5-tot-cap-dhtn-mumssdu8.jpg"
+  },
+  {
+    "id": "mumt4bwzdfdx",
+    "title": "Đồ án hệ cử nhân đạt điểm cao nhất hội đồng",
+    "date": "06/2026",
+    "category": "Học tập",
+    "featured": false,
+    "desc": "\"Oách xà lách vô cùng...\"",
+    "image": "/uploads/do-an-he-cu-nhan-dat-diem-cao-nhat-hoi-d-mumt4bwf.jpg"
+  },
+  {
+    "id": "mumt6h9eokyp",
+    "title": "Bài báo NCKH đăng trên tạp chí KH&CN ĐHTN",
+    "date": "06/2026",
+    "category": "Học tập",
+    "featured": true,
+    "desc": "Link bài báo: https://jst.tnu.edu.vn/jst/article/view/15917",
+    "image": "/uploads/bai-bao-nckh-dang-tren-tap-chi-kh-cn-dht-mumt6h8q.jpg"
+  },
+  {
+    "id": "mumt7u9znl9k",
+    "title": "Giải nhì cuộc thi \" Phát triển phần mềm nguồn mở \"",
+    "date": "09/2026",
+    "category": "Cuộc thi",
+    "featured": true,
+    "desc": "Vẫn không thoát được kết cục \"Vua về nhì\"",
+    "image": "/uploads/giai-nhi-cuoc-thi-phat-trien-phan-mem-ng-mumt7u9l.jpg"
+  }
+]

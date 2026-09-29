@@ -1,0 +1,139 @@
+[
+  {
+    "id": "dmsApplication",
+    "title": "DMS — Driver Monitoring System",
+    "category": "MOBILE",
+    "year": 2026,
+    "hue": 38,
+    "featured": true,
+    "pinned": true,
+    "desc": {
+      "vi": "Ứng dụng Android giám sát tài xế: phát hiện buồn ngủ và mất tập trung ngay trên thiết bị (nhắm mắt lâu, ngáp, quay đầu, rời khỏi camera) và cảnh báo bằng âm thanh, rung. Có hiệu chỉnh theo từng người, phát hiện va chạm bằng cảm biến + GPS, sao lưu đám mây và gợi ý an toàn bằng AI qua backend ASP.NET Core.",
+      "en": "Android driver-monitoring app that detects fatigue and distraction on-device (eye closure, yawning, head turning, face absence) and warns with sound and vibration. Personal calibration, crash detection via motion sensors + GPS, cloud backup and AI safety insights through an ASP.NET Core backend."
+    },
+    "tags": [
+      "Kotlin",
+      "CameraX",
+      "MediaPipe",
+      "ASP.NET Core",
+      "Firebase",
+      "SQLite"
+    ],
+    "repo": "https://github.com/Vudinhdat02/dmsApplication",
+    "demo": "",
+    "images": [
+      "/uploads/dms-driver-monitoring-system-mumyct35.jpg"
+    ]
+  },
+  {
+    "id": "RC-UAV-ICTU",
+    "title": "RC-UAV-ICTU",
+    "category": "IOT",
+    "year": 2026,
+    "hue": 200,
+    "featured": false,
+    "pinned": true,
+    "desc": {
+      "en": "Custom UAV remote-control system on ESP32-S3: handheld transmitter + aircraft bridge over ESP-NOW with CRC-16 protected packets, OLED telemetry, flight modes (Stabilize, Alt Hold, Pos Hold), Return-to-Home and auto take-off/landing.",
+      "vi": "Hệ thống điều khiển UAV tự thiết kế trên ESP32-S3: tay điều khiển + bộ cầu nối trên máy bay qua ESP-NOW (gói tin có CRC-16), hiển thị telemetry trên OLED, các chế độ bay Stabilize / Alt Hold / Pos Hold, tự quay về và tự cất/hạ cánh."
+    },
+    "tags": [
+      "C/C++",
+      "ESP32-S3",
+      "ESP-NOW",
+      "STM32",
+      "GPS"
+    ],
+    "repo": "https://github.com/Vudinhdat02/RC-UAV-ICTU",
+    "demo": "",
+    "images": []
+  },
+  {
+    "id": "TC-UAV-ICTU",
+    "title": "TC-UAV-ICTU",
+    "category": "IOT",
+    "year": 2026,
+    "hue": 190,
+    "featured": false,
+    "pinned": true,
+    "desc": {
+      "en": "Experimental STM32 flight-controller firmware for a custom ESP-NOW quadcopter: nested attitude/rate PID with self-levelling, GPS position hold and return-to-home, IMU + barometer + magnetometer fusion, arming checks and failsafe landing.",
+      "vi": "Firmware bộ điều khiển bay STM32 cho quadcopter dùng ESP-NOW: PID lồng góc/tốc độ tự cân bằng, giữ vị trí GPS và tự quay về, kết hợp IMU + khí áp kế + la bàn, kiểm tra trước khi bay và hạ cánh an toàn khi mất tín hiệu."
+    },
+    "tags": [
+      "C",
+      "STM32F103",
+      "PID",
+      "PlatformIO",
+      "ICM-20602"
+    ],
+    "repo": "https://github.com/Vudinhdat02/TC-UAV-ICTU",
+    "demo": "",
+    "images": []
+  },
+  {
+    "id": "MemoryWidget",
+    "title": "MemoryWidget",
+    "category": "MOBILE",
+    "year": 2026,
+    "hue": 160,
+    "featured": false,
+    "pinned": false,
+    "desc": {
+      "en": "Lightweight Android app with 8 home-screen widgets showing live RAM, storage, battery and device info. Liquid-glass styles, adjustable transparency, Material You colours, one-tap RAM cleanup — pure Java, no internet permission.",
+      "vi": "Ứng dụng Android nhẹ với 8 mẫu widget màn hình chính hiển thị RAM, bộ nhớ, pin và thông tin máy theo thời gian thực. Hiệu ứng kính lỏng, chỉnh độ trong suốt, màu Material You, dọn RAM một chạm — Java thuần, không cần Internet."
+    },
+    "tags": [
+      "Java",
+      "Android",
+      "AppWidget",
+      "Material You"
+    ],
+    "repo": "https://github.com/Vudinhdat02/MemoryWidget",
+    "demo": "",
+    "images": []
+  },
+  {
+    "id": "vocabulary-saver-extension",
+    "title": "Auto Vocab Saver",
+    "category": "WEB",
+    "year": 2026,
+    "hue": 220,
+    "featured": false,
+    "pinned": false,
+    "desc": {
+      "en": "Chrome extension for English learners: highlight a word, press Ctrl + C and it is looked up and saved with its word type and Vietnamese meanings. Draggable vocabulary popup and CSV export for Excel.",
+      "vi": "Tiện ích Chrome cho người học tiếng Anh: bôi đen từ, nhấn Ctrl + C là từ được tra và lưu kèm loại từ, nghĩa tiếng Việt. Bảng từ vựng kéo thả được và xuất file CSV mở bằng Excel."
+    },
+    "tags": [
+      "JavaScript",
+      "Chrome Extension MV3",
+      "Storage API"
+    ],
+    "repo": "https://github.com/Vudinhdat02/vocabulary-saver-extension",
+    "demo": "",
+    "images": []
+  },
+  {
+    "id": "highlight-vocab-tool",
+    "title": "Highlighted Vocabulary Extractor",
+    "category": "WEB",
+    "year": 2026,
+    "hue": 250,
+    "featured": false,
+    "pinned": false,
+    "desc": {
+      "en": "Web tool that scans an uploaded image and extracts the vocabulary highlighted in blue; double-click to add words manually and copy the list in one click.",
+      "vi": "Công cụ web quét ảnh tải lên và tách các từ vựng được tô màu xanh; nhấp đúp để thêm từ thủ công và sao chép danh sách chỉ với một lần bấm."
+    },
+    "tags": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Image processing"
+    ],
+    "repo": "https://github.com/Vudinhdat02/Tool-for-extracting-highlighted-vocabulary-from-text",
+    "demo": "",
+    "images": []
+  }
+]

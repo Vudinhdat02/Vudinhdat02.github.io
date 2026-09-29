@@ -1,0 +1,14 @@
+.intro { margin-top: 14px; }
+.intro-list { margin: 0; display: grid; gap: 10px; }
+.intro-item {
+  position: relative; padding: 10px 14px; border-left: 2px solid var(--cyan);
+  background: linear-gradient(90deg, rgba(6,182,212,.07), transparent 70%); border-radius: 0 8px 8px 0;
+}
+.intro-item dt { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text-strong); font-size: 18px; }
+.intro-dot { width: 6px; height: 6px; border-radius: 1px; background: var(--cyan); transform: rotate(45deg); box-shadow: 0 0 8px var(--cyan); flex: 0 0 auto; }
+.intro-item dd { margin: 4px 0 0 14px; color: var(--text-dim); font-size: 17.5px; line-height: 1.55; white-space: pre-line; overflow-wrap: anywhere; }
+.intro-item .ed-tools { position: absolute; top: 6px; right: 6px; padding: 4px; border-radius: 8px; opacity: 0; pointer-events: none;
+  background: rgb(var(--bg0-rgb) / .92); border: 1px solid var(--line); transition: opacity .2s; z-index: 1; }
+.intro-item:hover .ed-tools, .intro-item:focus-within .ed-tools { opacity: 1; pointer-events: auto; }
+@media (pointer: coarse) { .intro-item .ed-tools { position: static; opacity: 1; pointer-events: auto; margin-top: 8px; width: fit-content; } }
+.intro-add { margin-top: 10px; }

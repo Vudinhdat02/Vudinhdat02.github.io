@@ -1,0 +1,240 @@
+/* ================= DESIGN TOKENS =================
+ * Dark theme is the default. Light theme overrides the same tokens below.
+ * [data-theme="dark"] is also used to force the boot screen to stay dark.
+ */
+:root {
+  --font-display: 'Chakra Petch', 'Saira', system-ui, sans-serif;
+  --font-body: 'Saira', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --hud-h: 64px;
+  --term-h: 46px;
+  --radius: 10px;
+  --tap: 48px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* All three fonts include Vietnamese letters, so EN and VI look the same and never break. */
+
+:root, [data-theme="dark"] {
+  --bg0: #0B0F19;
+  --bg1: #0F172A;
+  --bg2: #111c33;
+  --bg0-rgb: 11 15 25;
+  --bg1-rgb: 15 23 42;
+  --shadow-rgb: 0 0 0;
+  --media-bg: #0a1222;
+  --page-glow: #0f1e3a;
+  --cyan: #06B6D4;
+  --ice: #60A5FA;
+  --sky: #38BDF8;
+  --gold: #FBBF24;
+  --amber: #F59E0B;
+  --danger: #F43F5E;
+  --ok: #34D399;
+  --text-strong: #FFFFFF;
+  --text: #E2E8F0;
+  --text-dim: #94A3B8;
+  --text-faint: #64748B;
+  --line: rgba(56, 189, 248, 0.22);
+  --line-strong: rgba(56, 189, 248, 0.55);
+  --glass: rgb(var(--bg1-rgb) / 0.55);
+  --glass-strong: rgb(var(--bg0-rgb) / 0.82);
+  --panel-bg: linear-gradient(160deg, rgb(var(--bg1-rgb) / 0.86), rgb(var(--bg0-rgb) / 0.8));
+  --glow-cyan: 0 0 12px rgba(6, 182, 212, 0.55), 0 0 32px rgba(6, 182, 212, 0.18);
+  --glow-gold: 0 0 14px rgba(251, 191, 36, 0.55), 0 0 36px rgba(245, 158, 11, 0.22);
+  --tier-legendary: #FBBF24;
+  --tier-epic: #38BDF8;
+  --tier-rare: #60A5FA;
+  --emblem-ink: #FFFFFF;
+  --energy-core: #FFFFFF;
+  --emblem-shine: #FFFFFF;
+  --emblem-locked: #475569;
+  --scanline: rgba(255, 255, 255, 0.025);
+  --vignette: rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg0: #F4F7FB;
+  --bg1: #FFFFFF;
+  --bg2: #E8EEF6;
+  --bg0-rgb: 244 247 251;
+  --bg1-rgb: 255 255 255;
+  --shadow-rgb: 71 85 105;
+  --media-bg: #E6EEF7;
+  --page-glow: #DCEBFA;
+  --cyan: #0E7490;
+  --ice: #2563EB;
+  --sky: #0369A1;
+  --gold: #B45309;
+  --amber: #D97706;
+  --danger: #E11D48;
+  --ok: #047857;
+  --text-strong: #020617;
+  --text: #0F172A;
+  --text-dim: #475569;
+  --text-faint: #64748B;
+  --line: rgba(3, 105, 161, 0.18);
+  --line-strong: rgba(3, 105, 161, 0.45);
+  --glass: rgb(255 255 255 / 0.72);
+  --glass-strong: rgb(255 255 255 / 0.9);
+  --panel-bg: linear-gradient(160deg, rgb(255 255 255 / 0.9), rgb(244 247 251 / 0.84));
+  --glow-cyan: 0 0 0 1px rgba(14, 116, 144, 0.12), 0 6px 18px rgba(14, 116, 144, 0.18);
+  --glow-gold: 0 0 0 1px rgba(180, 83, 9, 0.12), 0 6px 18px rgba(217, 119, 6, 0.2);
+  --tier-legendary: #B45309;
+  --tier-epic: #0369A1;
+  --tier-rare: #4F46E5;
+  --emblem-ink: currentColor;
+  --energy-core: #22D3EE;
+  --emblem-shine: #FFFFFF;
+  --emblem-locked: #94A3B8;
+  --scanline: rgba(15, 23, 42, 0.018);
+  --vignette: rgba(148, 163, 184, 0.28);
+  color-scheme: light;
+}
+
+/* Neon text glows read as blur on a light background — switch them off there */
+:root[data-theme="light"] .os *,
+:root[data-theme="light"] .bm-backdrop * { text-shadow: none !important; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 70% -10%, var(--page-glow) 0%, transparent 60%), var(--bg0);
+  transition: background-color .4s var(--ease);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+a { color: var(--sky); text-decoration: none; }
+img, svg { display: block; }
+::selection { background: rgba(6, 182, 212, 0.35); color: var(--text-strong); }
+
+/* Custom cursor only on fine pointers */
+@media (pointer: fine) {
+  html.custom-cursor, html.custom-cursor * { cursor: none !important; }
+}
+
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
+
+/* Scrollbars */
+* { scrollbar-width: thin; scrollbar-color: rgba(56,189,248,.35) transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: rgba(56,189,248,.35); border-radius: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ================= UTILITIES ================= */
+.mono { font-family: var(--font-mono); font-weight: 500; }
+.display { font-family: var(--font-display); letter-spacing: 0.08em; }
+.dim { color: var(--text-dim); }
+.faint { color: var(--text-faint); }
+.cyan { color: var(--cyan); }
+.gold { color: var(--gold); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Neon button */
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 40px; padding: 0 18px;
+  font-family: var(--font-mono); font-size: 14.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--sky);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(56,189,248,.08), rgba(56,189,248,.02));
+  transition: box-shadow .25s var(--ease), background .25s, color .25s, transform .15s;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+.btn:hover { color: var(--text-strong); background: rgba(56,189,248,.16); box-shadow: var(--glow-cyan); }
+.btn.primary { color: var(--bg0); background: linear-gradient(90deg, var(--cyan), var(--sky)); border-color: transparent; font-weight: 700; }
+.btn.primary:hover { box-shadow: var(--glow-cyan); filter: brightness(1.1); }
+.btn[disabled] { opacity: .45; pointer-events: none; }
+
+/* Chip / toggle */
+.chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 36px; padding: 0 14px;
+  font-family: var(--font-mono); font-size: 13.5px; letter-spacing: .16em;
+  color: var(--text-dim);
+  border: 1px solid var(--line); border-radius: 999px;
+  background: rgb(var(--bg1-rgb) / .5);
+  transition: all .2s var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.chip:hover { color: var(--text); border-color: var(--line-strong); }
+.chip.active { color: var(--bg0); background: var(--sky); border-color: var(--sky); box-shadow: 0 0 16px rgba(56,189,248,.5); }
+
+/* ================= GLITCH ================= */
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute; inset: 0;
+  opacity: 0; pointer-events: none;
+}
+.glitch::before { color: #f0f; }
+.glitch::after { color: var(--cyan); }
+.glitch:hover::before, .glitch.is-glitching::before { opacity: .7; animation: glitch-a .45s steps(2) infinite; }
+.glitch:hover::after, .glitch.is-glitching::after { opacity: .7; animation: glitch-b .45s steps(2) infinite; }
+@keyframes glitch-a {
+  0% { clip-path: inset(10% 0 70% 0); transform: translate(-2px, -1px); }
+  50% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 1px); }
+  100% { clip-path: inset(30% 0 40% 0); transform: translate(-1px, 2px); }
+}
+@keyframes glitch-b {
+  0% { clip-path: inset(70% 0 5% 0); transform: translate(2px, 1px); }
+  50% { clip-path: inset(5% 0 75% 0); transform: translate(-2px, -1px); }
+  100% { clip-path: inset(40% 0 30% 0); transform: translate(1px, -2px); }
+}
+
+/* Screen overlays */
+.scanlines {
+  position: fixed; inset: 0; pointer-events: none; z-index: 60;
+  background: repeating-linear-gradient(to bottom, var(--scanline) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay;
+}
+:root[data-theme="light"] .scanlines { mix-blend-mode: normal; }
+.vignette {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 55%, var(--vignette) 100%);
+}
+
+/* ================= TOUCH ADAPTATION ================= */
+@media (pointer: coarse) {
+  .btn, .chip, .tap { min-height: var(--tap); min-width: var(--tap); }
+  .chip { padding: 0 18px; }
+  /* hover effects fall back to clean touch-scale feedback */
+  .touch-scale { transition: transform .18s var(--ease); }
+  .touch-scale:active { transform: scale(.965); }
+  .glitch:hover::before, .glitch:hover::after { opacity: 0; animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

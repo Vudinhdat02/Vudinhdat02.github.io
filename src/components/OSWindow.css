@@ -1,0 +1,36 @@
+.oswin { position: relative; display: flex; flex-direction: column; min-width: 0; box-shadow: 0 20px 60px rgb(var(--shadow-rgb) / .35), inset 0 1px 0 rgba(255,255,255,.04); }
+.oswin::before {
+  content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+  padding: 1px; background: linear-gradient(135deg, rgba(6,182,212,.6), transparent 30%, transparent 70%, rgba(96,165,250,.5));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.oswin.accent-gold::before { background: linear-gradient(135deg, rgba(251,191,36,.6), transparent 30%, transparent 70%, rgba(56,189,248,.5)); }
+.oswin-bar {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(6,182,212,.08), transparent 60%);
+}
+.oswin-dots { display: flex; gap: 5px; }
+.oswin-dots i { width: 7px; height: 7px; border-radius: 1px; background: rgba(56,189,248,.25); }
+.oswin-dots i:first-child { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+.oswin-title { margin: 0; font: 700 14.5px/1 var(--font-display); letter-spacing: .2em; color: var(--text); text-transform: uppercase; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oswin-code { font-size: 12.5px; color: var(--text-faint); letter-spacing: .12em; }
+.oswin-actions { display: flex; gap: 6px; }
+.oswin-body { padding: 18px; flex: 1; min-height: 0; }
+.oswin-corner { position: absolute; width: 12px; height: 12px; border: 0 solid var(--cyan); pointer-events: none; }
+.accent-gold .oswin-corner { border-color: var(--gold); }
+.oswin-corner.tl { top: -3px; left: -3px; border-top-width: 2px; border-left-width: 2px; }
+.oswin-corner.tr { top: -3px; right: -3px; border-top-width: 2px; border-right-width: 2px; }
+.oswin-corner.bl { bottom: -3px; left: -3px; border-bottom-width: 2px; border-left-width: 2px; }
+.oswin-corner.br { bottom: -3px; right: -3px; border-bottom-width: 2px; border-right-width: 2px; }
+@media (max-width: 760px) { .oswin-body { padding: 14px; } .oswin-code { display: none; } }
+
+/* cursor spotlight */
+.oswin-spot { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 50%), rgba(56,189,248,.09), transparent 60%); }
+.oswin:hover .oswin-spot { opacity: 1; }
+@media (pointer: coarse) { .oswin-spot { display: none; } }
+
+/* Performance: big content panels use a denser tint instead of a live backdrop blur
+   (blurring the animated background under large panels every frame is expensive). */
+.oswin.glass { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--panel-bg); }

@@ -1,0 +1,11 @@
+/* project cover art + photos (used on the Projects page and the Dashboard) */
+.pc-cover { width: 100%; height: 100%; }
+.pc-orbit { opacity: .8; }
+.pc-cover-wrap { position: relative; width: 100%; height: 100%; }
+.pc-glyph { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center;
+  width: 64px; height: 64px; border-radius: 16px; color: hsl(var(--h) 90% 62%);
+  background: rgb(var(--bg0-rgb) / .78); border: 1px solid hsl(var(--h) 80% 55% / .5);
+  box-shadow: 0 0 24px hsl(var(--h) 90% 50% / .35); transition: transform .4s var(--ease); }
+.pc-photo { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; }
+.pc-photo-bg { position: absolute; inset: -20px; width: calc(100% + 40px); height: calc(100% + 40px); object-fit: cover; filter: blur(18px) saturate(1.3); opacity: .55; }
+.pc-photo-fg { position: relative; width: 100%; height: 100%; object-fit: contain; transition: transform .6s var(--ease); }

@@ -1,0 +1,9 @@
+.site-foot { margin-top: 48px; padding: 20px 4px 4px; display: grid; justify-items: center; gap: 6px; text-align: center; }
+.site-foot-line { width: min(520px, 80%); height: 1px; margin-bottom: 10px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent); }
+.site-foot-copy { margin: 0; font-size: 16.5px; color: var(--text-dim); }
+.site-foot-meta { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 10px;
+  font-size: 13.5px; letter-spacing: .1em; color: var(--text-faint); }
+.site-foot-meta .sep { font-size: 7px; color: var(--cyan); opacity: .7; }
+.site-foot-meta a { color: var(--text-faint); transition: color .2s; }
+.site-foot-meta a:hover { color: var(--cyan); }

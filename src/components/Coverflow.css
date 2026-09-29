@@ -1,0 +1,57 @@
+/* ============ 3D cover-flow carousel ============ */
+.cf3 { --card-w: clamp(220px, 30vw, 360px); --card-h: calc(var(--card-w) * .75); display: grid; gap: 18px; }
+.cf3.compact { --card-w: clamp(200px, 26vw, 320px); }
+.cf3-stage { position: relative; height: calc(var(--card-h) + 40px); perspective: 1200px; transform-style: preserve-3d;
+  display: grid; place-items: center; outline: none; cursor: grab; touch-action: pan-y; }
+.cf3-stage:active { cursor: grabbing; }
+.cf3-stage:focus-visible { outline: 2px solid var(--cyan); outline-offset: 6px; border-radius: 12px; }
+.cf3-floor { position: absolute; left: 10%; right: 10%; bottom: 0; height: 40px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(6,182,212,.28), transparent 70%); }
+
+.cf3-card { position: absolute; width: var(--card-w); height: var(--card-h); padding: 0; border: 0; background: none; cursor: pointer;
+  transform-style: preserve-3d; will-change: transform, opacity; }
+.cf3-inner { --tx: 0deg; --ty: 0deg; --mx: 50%; --my: 50%;
+  position: absolute; inset: 0; display: block; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--line-strong); background: var(--media-bg);
+  box-shadow: 0 24px 50px rgb(var(--shadow-rgb) / .28);
+  transform: rotateX(var(--tx)) rotateY(var(--ty)); transition: transform .5s var(--ease), box-shadow .4s, border-color .4s; }
+.cf3-card.front .cf3-inner { border-color: var(--gold); box-shadow: 0 30px 70px rgb(var(--shadow-rgb) / .35), 0 0 0 1px rgba(251,191,36,.35), 0 0 40px rgba(251,191,36,.18); }
+.cf3-card.front:hover .cf3-inner { transition: transform .08s linear, box-shadow .4s; }
+.cf3-img { position: absolute; inset: 0; display: grid; place-items: center; color: var(--gold); overflow: hidden; }
+.cf3-bg { position: absolute; inset: -20px; width: calc(100% + 40px); height: calc(100% + 40px); object-fit: cover; filter: blur(16px) saturate(1.3); opacity: .5; }
+.cf3-fg { position: relative; width: 100%; height: 100%; object-fit: contain; padding: 8px; transition: scale .6s var(--ease); -webkit-user-drag: none; }
+.cf3-card.front:hover .cf3-fg { scale: 1.05; }
+.cf3-star { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  color: var(--gold); background: rgb(var(--bg0-rgb) / .85); border: 1px solid rgba(251,191,36,.6); }
+.cf3-star svg { fill: currentColor; }
+.cf3-glare { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s; mix-blend-mode: screen;
+  background: radial-gradient(320px circle at var(--mx) var(--my), rgba(255,255,255,.35), transparent 55%); }
+.cf3-card.front:hover .cf3-glare { opacity: 1; }
+/* light sweep across the front card every time it arrives */
+.cf3-shine { position: absolute; inset: 0; pointer-events: none; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.45) 50%, transparent 65%); }
+.cf3-card.front .cf3-shine { animation: cf3-shine 1.2s .25s var(--ease) both; }
+@keyframes cf3-shine { to { transform: translateX(120%); } }
+
+.cf3-info { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; min-height: 120px; }
+.cf3-nav { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; color: var(--text-strong);
+  border: 1px solid var(--line-strong); background: rgb(var(--bg1-rgb) / .7); transition: all .2s; }
+.cf3-nav:hover { border-color: var(--gold); color: var(--gold); box-shadow: var(--glow-gold); }
+.cf3-text { text-align: center; display: grid; justify-items: center; gap: 6px; }
+.cf3-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; font-size: 13px; }
+.cf3-date { display: inline-flex; align-items: center; gap: 5px; color: var(--gold); font-weight: 600; }
+.cf3-cat { padding: 1px 9px; border-radius: 999px; color: var(--sky); border: 1px solid var(--line-strong); }
+.cf3-title { margin: 0; font-size: clamp(19px, 2.2vw, 25px); font-weight: 800; color: var(--text-strong); text-wrap: balance; }
+.cf3-desc { margin: 0; max-width: 680px; color: var(--text-dim); font-size: 16.5px; line-height: 1.55; white-space: pre-line;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.cf3-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.cf3-dot { position: relative; width: 26px; height: 6px; border-radius: 3px; overflow: hidden; background: var(--line-strong); transition: width .3s var(--ease), background-color .3s; }
+.cf3-dot.on { width: 46px; background: rgba(251,191,36,.3); }
+.cf3-progress { position: absolute; inset: 0; background: var(--gold); transform-origin: left; animation: cf3-progress linear both; }
+@keyframes cf3-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (max-width: 600px) {
+  .cf3 { --card-w: 68vw; }
+  .cf3-info { grid-template-columns: 1fr; }
+  .cf3-nav { display: none; }
+}

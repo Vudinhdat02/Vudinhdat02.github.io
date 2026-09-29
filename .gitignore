@@ -1,0 +1,17 @@
+# thư viện & bản build (tự tạo lại được, không đưa lên GitHub)
+node_modules
+dist
+
+# file bí mật / cấu hình riêng trên máy — KHÔNG BAO GIỜ đưa lên GitHub
+.env
+.env.*
+*.local
+
+# rác hệ điều hành / trình soạn thảo
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# bản xem nhanh cũ, không cần thiết
+preview.html

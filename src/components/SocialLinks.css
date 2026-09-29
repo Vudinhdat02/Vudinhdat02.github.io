@@ -1,0 +1,37 @@
+.sl { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sl-item {
+  --brand: var(--cyan);
+  position: relative; display: flex; align-items: center; gap: 12px; min-height: 50px; padding: 0 14px 0 8px;
+  border: 1px solid var(--line); border-radius: 8px; color: var(--text);
+  background: rgb(var(--bg1-rgb) / .35); overflow: hidden;
+  transition: border-color .2s, background-color .2s, transform .2s var(--ease);
+}
+.sl-item::before { /* brand-coloured edge */
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--brand);
+  transform: scaleY(0); transition: transform .25s var(--ease);
+}
+.sl-item:hover { border-color: color-mix(in srgb, var(--brand) 65%, transparent); background: color-mix(in srgb, var(--brand) 9%, transparent); transform: translateX(3px); }
+.sl-item:hover::before { transform: scaleY(1); }
+.sl-icon {
+  flex: 0 0 auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px;
+  color: var(--brand); background: color-mix(in srgb, var(--brand) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+}
+.sl-platform { font-family: var(--font-mono); font-size: 14.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
+.sl-handle { flex: 1; min-width: 0; text-align: right; font-weight: 600; font-size: 17.5px; color: var(--text-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sl-go { flex: 0 0 auto; color: var(--text-faint); transition: color .2s, transform .2s; }
+.sl-item:hover .sl-go { color: var(--brand); transform: translate(2px, -2px); }
+
+.sl-github { --brand: #a78bfa; }
+.sl-youtube { --brand: #ff3b3b; }
+.sl-tiktok { --brand: #25f4ee; }
+.sl-instagram { --brand: #f0529c; }
+.sl-mail { --brand: var(--sky); }
+.sl-call { --brand: var(--ok); }
+:root[data-theme="light"] .sl-tiktok { --brand: #0f9e9a; }
+:root[data-theme="light"] .sl-github { --brand: #6d28d9; }
+
+@media (max-width: 420px) {
+  .sl-platform { font-size: 13px; letter-spacing: .08em; }
+  .sl-handle { font-size: 16px; }
+}

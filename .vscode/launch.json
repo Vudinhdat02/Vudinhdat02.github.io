@@ -1,0 +1,22 @@
+{
+  // F5 → chạy website và mở trình duyệt. Chọn Chrome hoặc Edge ở ô "Run and Debug" bên trái.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chạy website (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "Chạy website (npm run dev)"
+    },
+    {
+      "name": "Chạy website (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "Chạy website (npm run dev)"
+    }
+  ]
+}

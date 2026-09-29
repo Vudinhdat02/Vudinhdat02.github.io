@@ -1,0 +1,109 @@
+.hud {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  height: var(--hud-h);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+  padding: 0 20px; padding-top: env(safe-area-inset-top);
+  background: linear-gradient(180deg, rgb(var(--bg0-rgb) / .92), rgb(var(--bg0-rgb) / .65));
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.hud::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: .8; animation: hud-sweep 6s linear infinite; background-size: 40% 100%; background-repeat: no-repeat;
+}
+@keyframes hud-sweep { from { background-position: -40% 0; } to { background-position: 140% 0; } }
+
+.hud-brand { display: flex; align-items: center; gap: 10px; }
+.hud-logo { width: 26px; height: 26px; position: relative; border: 1px solid var(--cyan); transform: rotate(45deg); box-shadow: var(--glow-cyan); }
+.hud-logo i { position: absolute; background: var(--cyan); }
+.hud-logo i:nth-child(1) { inset: 5px; background: transparent; border: 1px solid var(--sky); }
+.hud-logo i:nth-child(2) { width: 4px; height: 4px; left: 10px; top: 10px; animation: blink 1.4s infinite; }
+.hud-logo i:nth-child(3) { width: 1px; height: 36px; left: 12px; top: -6px; opacity: .3; }
+@keyframes blink { 50% { opacity: .2; } }
+.hud-name { font-size: 18px; font-weight: 900; color: var(--text-strong); text-shadow: 0 0 12px rgba(6,182,212,.6); }
+.hud-ver { font-size: 12.5px; color: var(--text-faint); border: 1px solid var(--line); padding: 1px 6px; border-radius: 3px; }
+
+.hud-nav { display: flex; justify-content: center; gap: 4px; }
+.hud-tab {
+  position: relative; display: flex; align-items: center; gap: 8px;
+  height: 38px; padding: 0 16px;
+  font-family: var(--font-mono); font-size: 14px; letter-spacing: .16em;
+  color: var(--text-dim); border-radius: 6px; transition: color .2s;
+}
+.hud-tab:hover { color: var(--text-strong); }
+.hud-tab.active { color: var(--sky); }
+.hud-tab > span:not(.hud-tab-glow) { position: relative; z-index: 1; }
+.hud-tab svg { position: relative; z-index: 1; }
+.hud-tab-glow {
+  position: absolute; inset: 0; border-radius: 6px;
+  background: linear-gradient(180deg, rgba(56,189,248,.14), rgba(56,189,248,.04));
+  border: 1px solid rgba(56,189,248,.5); box-shadow: 0 0 18px rgba(56,189,248,.25), inset 0 -2px 0 var(--cyan);
+}
+
+.hud-status { display: flex; align-items: center; gap: 18px; }
+.hud-controls { display: flex; align-items: center; gap: 6px; }
+.hud-stat { display: flex; align-items: center; gap: 8px; }
+.hud-val { font-size: 13.5px; color: var(--sky); letter-spacing: .08em; }
+.hud-stat.offline .hud-val { color: var(--danger); }
+.hud-meter { width: 46px; height: 5px; background: rgba(56,189,248,.12); border-radius: 3px; overflow: hidden; }
+.hud-meter span { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--ice)); transition: width 1.2s var(--ease); box-shadow: 0 0 8px var(--cyan); }
+.hud-signal { display: flex; align-items: flex-end; gap: 2px; height: 15px; }
+.hud-signal i { width: 3px; background: rgba(148,163,184,.25); border-radius: 1px; }
+.hud-signal i.on { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
+.hud-clock { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
+.hud-time { font-size: 17px; font-weight: 700; color: var(--text-strong); letter-spacing: .1em; text-shadow: 0 0 10px rgba(6,182,212,.5); font-variant-numeric: tabular-nums; }
+.hud-date { font-size: 12px; color: var(--text-faint); letter-spacing: .14em; }
+.hud-audio {
+  display: flex; align-items: center; gap: 6px; height: 38px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 6px; color: var(--text-dim); transition: all .2s;
+}
+.hud-audio:hover { border-color: var(--line-strong); color: var(--text-strong); }
+.hud-audio.on { color: var(--cyan); border-color: rgba(6,182,212,.6); box-shadow: 0 0 14px rgba(6,182,212,.25); }
+.hud-eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
+.hud-eq i { width: 2px; height: 3px; background: currentColor; border-radius: 1px; }
+.hud-audio.on .hud-eq i { animation: eq .9s ease-in-out infinite; }
+.hud-audio.on .hud-eq i:nth-child(2) { animation-delay: -.3s; }
+.hud-audio.on .hud-eq i:nth-child(3) { animation-delay: -.6s; }
+.hud-audio.on .hud-eq i:nth-child(4) { animation-delay: -.15s; }
+@keyframes eq { 0%,100% { height: 3px; } 50% { height: 14px; } }
+
+/* mobile bottom nav */
+.mnav { display: none; }
+
+@media (max-width: 1280px) { .hide-sm { display: none; } }
+@media (max-width: 1100px) {
+  .hud-tab { padding: 0 10px; }
+  .hud-tab > span:not(.hud-tab-glow) { display: none; }
+  .hide-md { display: none; }
+}
+@media (max-width: 760px) {
+  .hud { grid-template-columns: 1fr auto; padding: 0 12px; padding-top: env(safe-area-inset-top); gap: 8px; }
+  .hud-nav { display: none; }
+  .hud-ver { display: none; }
+  .hud-status { gap: 10px; }
+  .hud-audio { height: var(--tap); min-width: var(--tap); justify-content: center; }
+  .hud-audio .hud-eq { display: none; }
+  .hud-controls { gap: 4px; }
+  .hud-date { display: none; }
+  .mnav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    background: rgb(var(--bg0-rgb) / .9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+  }
+  .mnav-btn {
+    position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    min-height: 54px; color: var(--text-faint); font: 600 11px/1.1 var(--font-mono); letter-spacing: 0; white-space: nowrap; text-align: center;
+    transition: transform .15s var(--ease), color .2s;
+  }
+  .mnav-btn:active { transform: scale(.94); }
+  .mnav-btn.active { color: var(--sky); }
+  .mnav-btn svg, .mnav-btn > span:not(.mnav-glow) { position: relative; z-index: 1; }
+  .mnav-glow { position: absolute; inset: 2px 6px; border-radius: 10px; background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.4); box-shadow: 0 0 16px rgba(56,189,248,.25); }
+}
+@media (max-width: 520px) {
+  .hud .hud-name { display: none; }
+}
+@media (max-width: 360px) { .hud-clock { display: none; } }

@@ -1,0 +1,4 @@
+{
+  // Hiện mục "NPM SCRIPTS" trong thanh Explorer bên trái, có nút ▶ để chạy
+  "npm.enableScriptExplorer": true
+}

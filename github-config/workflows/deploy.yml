@@ -1,0 +1,52 @@
+# Tự động build và đưa website lên GitHub Pages mỗi khi bạn push lên nhánh main.
+# Bật một lần: GitHub → repo → Settings → Pages → Source: "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # cho phép bấm chạy tay ở tab Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Repo tên "<user>.github.io" → web ở gốc "/"; repo tên khác (vd "web") → web ở "/web/"
+      - name: Build
+        run: |
+          REPO="${GITHUB_REPOSITORY#*/}"
+          if [[ "${REPO,,}" == *.github.io ]]; then export BASE_PATH="/"; else export BASE_PATH="/${REPO}/"; fi
+          echo "BASE_PATH=$BASE_PATH"
+          npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

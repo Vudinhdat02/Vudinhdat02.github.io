@@ -1,0 +1,18 @@
+.adm-intro { margin: 0 0 4px; color: var(--text-dim); font-size: 16px; line-height: 1.6; }
+.ed-hint a { color: var(--cyan); text-decoration: underline; }
+
+/* bar shown on the live site while you are signed in */
+.adm-bar { position: fixed; z-index: 70; top: calc(var(--hud-h) + 10px); right: 14px; display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px 6px 12px; border-radius: 12px; border: 1px solid rgba(251,191,36,.55);
+  background: rgb(var(--bg1-rgb) / .96); box-shadow: 0 10px 30px rgb(var(--shadow-rgb) / .25); max-width: calc(100vw - 28px); }
+.adm-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); flex: 0 0 auto; }
+.adm-bar.saving .adm-dot, .adm-bar.building .adm-dot { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); animation: blink 1s infinite; }
+.adm-bar.done .adm-dot { background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+.adm-bar.failed .adm-dot { background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+.adm-text { display: grid; line-height: 1.2; min-width: 0; }
+.adm-text b { font: 700 12.5px var(--font-mono); letter-spacing: .1em; color: var(--gold); text-transform: uppercase; }
+.adm-text small { font-size: 13px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.adm-bar .ed-mini { min-height: 30px; }
+@media (max-width: 760px) {
+  .adm-bar { top: auto; bottom: calc(150px + env(safe-area-inset-bottom)); right: 10px; left: 10px; }
+}

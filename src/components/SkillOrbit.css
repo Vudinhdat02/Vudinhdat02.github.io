@@ -1,0 +1,47 @@
+.so { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 22px; align-items: start; }
+.so-orbit { position: sticky; top: 8px; }
+.so-orbit { position: relative; width: 100%; max-width: 280px; aspect-ratio: 1; margin: 0 auto; }
+.so-orbit svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.so-track { fill: none; stroke: var(--line); stroke-width: 1; }
+.so-track.t0 { stroke-dasharray: 3 7; }
+.so-core { fill: rgb(var(--bg0-rgb) / .85); stroke: var(--cyan); stroke-width: 1.5; }
+.so-core-pulse { position: absolute; left: 50%; top: 50%; width: 30%; height: 30%; margin: -15% 0 0 -15%; border-radius: 50%;
+  border: 1px solid var(--cyan); opacity: 0; animation: so-pulse 3s ease-out infinite; will-change: transform, opacity; }
+@keyframes so-pulse { from { transform: scale(.9); opacity: .7; } to { transform: scale(1.6); opacity: 0; } }
+.so-ring { position: absolute; inset: 0; animation: so-spin linear infinite; will-change: transform; }
+.so-ring.r1 { animation-direction: reverse; }
+.so-node-in { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; animation: so-spin linear infinite reverse; }
+.so-node-in.r1 { animation-direction: normal; }
+.so-orbit:hover .so-ring, .so-orbit:hover .so-node-in { animation-play-state: paused; }
+@keyframes so-spin { to { transform: rotate(360deg); } }
+.so-node { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; padding: 0; border-radius: 50%; cursor: pointer;
+  font: 700 12px var(--font-mono); color: var(--sky); background: rgb(var(--bg0-rgb) / .92);
+  border: 1.5px solid var(--sky); box-shadow: 0 0 0 4px rgba(56,189,248,.12); transition: background .2s, color .2s, box-shadow .2s, transform .2s; }
+.so-node.on { background: var(--cyan); color: var(--bg0); border-color: var(--text-strong); box-shadow: 0 0 0 5px rgba(6,182,212,.35), 0 0 16px var(--cyan); transform: scale(1.15); }
+.so-beam { stroke: var(--cyan); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.so-core-label { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.so-core-label span { display: grid; justify-items: center; max-width: 76px; text-align: center; font: 700 13.5px/1.2 var(--font-display);
+  letter-spacing: .04em; color: var(--text-strong); }
+.so-core-label b { font-size: 26px; color: var(--cyan); line-height: 1; }
+.so-core-label small { font: 600 8.5px var(--font-mono); letter-spacing: .2em; color: var(--text-faint); margin-top: 3px; }
+
+.so-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.so-item { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 10px 12px;
+  border-radius: 8px; border: 1px solid transparent; overflow: hidden; transition: background .25s, border-color .25s, transform .25s var(--ease); cursor: default; }
+.so-item.on { background: rgba(56,189,248,.07); border-color: var(--line); transform: translateX(4px); }
+.so-num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; font-size: 13.5px; font-weight: 700;
+  color: var(--sky); border: 1px solid var(--line); background: rgb(var(--bg0-rgb) / .5); transition: all .25s; }
+.so-item.on .so-num { color: var(--bg0); background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 12px rgba(6,182,212,.6); }
+.so-text { display: grid; gap: 2px; min-width: 0; grid-column: 2; grid-row: 1; }
+.so-name { font-weight: 700; font-size: 18.5px; color: var(--text-strong); }
+.so-desc { color: var(--text-dim); font-size: 17px; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-line; }
+.so-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cyan); transform: scaleY(0); transition: transform .3s var(--ease); box-shadow: 0 0 8px var(--cyan); }
+.so-item.on .so-bar { transform: scaleY(1); }
+.so-item .ed-tools { position: absolute; top: 8px; right: 8px; padding: 4px; border-radius: 8px; opacity: 0; pointer-events: none;
+  background: rgb(var(--bg0-rgb) / .92); border: 1px solid var(--line); transition: opacity .2s; z-index: 1; }
+.so-item:hover .ed-tools, .so-item:focus-within .ed-tools { opacity: 1; pointer-events: auto; }
+@media (pointer: coarse) { .so-item .ed-tools { position: static; opacity: 1; pointer-events: auto; grid-column: 2; background: none; border: 0; padding: 4px 0 0; } }
+.so-add { margin-top: 10px; min-height: 48px; }
+.so-empty { margin: 0 0 8px; }
+@media (max-width: 900px) { .so { grid-template-columns: 1fr; } .so-orbit { max-width: 240px; } }
+@media (prefers-reduced-motion: reduce) { .so-ring, .so-node-in, .so-core-pulse { animation: none; } }

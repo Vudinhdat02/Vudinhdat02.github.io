@@ -1,0 +1,28 @@
+.boot { position: fixed; inset: 0; z-index: 100; background: #05080f; display: grid; place-items: center; padding: 20px; }
+.boot::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(6,182,212,.08), transparent 65%),
+    repeating-linear-gradient(to bottom, rgba(6,182,212,.04) 0 1px, transparent 1px 3px);
+}
+.boot-screen { position: relative; width: min(760px, 100%); transform-origin: center; }
+.boot-term { font-size: clamp(11px, 2.6vw, 14px); color: var(--cyan); min-height: 190px; text-shadow: 0 0 8px rgba(6,182,212,.6); }
+.boot-line { display: flex; align-items: baseline; gap: 10px; margin: 4px 0; white-space: nowrap; }
+.boot-prompt { color: var(--ice); }
+.boot-text { overflow: hidden; text-overflow: ellipsis; }
+.boot-dots { flex: 1; border-bottom: 1px dotted rgba(6,182,212,.35); transform: translateY(-4px); min-width: 12px; }
+.boot-ok { color: var(--ok); text-shadow: 0 0 8px rgba(52,211,153,.7); }
+.boot-caret { display: inline-block; width: 8px; height: 1em; background: var(--cyan); margin-left: 2px; vertical-align: -2px; animation: blink .8s steps(1) infinite; }
+.boot-progress { position: relative; margin-top: 22px; height: 4px; background: rgba(6,182,212,.12); border-radius: 2px; }
+.boot-progress-bar { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--ice)); box-shadow: 0 0 12px var(--cyan); transition: width .3s var(--ease); border-radius: 2px; }
+.boot-progress span { position: absolute; right: 0; top: 10px; font-size: 13.5px; color: var(--text-faint); }
+.boot-granted-wrap { text-align: center; margin-top: 44px; animation: holo-in .6s var(--ease) both; }
+.boot-granted {
+  margin: 0; font-size: clamp(28px, 7vw, 58px); font-weight: 900; color: #fff;
+  text-shadow: 0 0 18px var(--cyan), 0 0 42px rgba(6,182,212,.5);
+}
+.boot-sub { color: var(--text-dim); font-size: 14.5px; letter-spacing: .2em; margin: 14px 0 22px; }
+.boot-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.boot-hint, .boot-skip { font-size: 12.5px; letter-spacing: .3em; color: var(--text-faint); margin-top: 22px; text-align: center; animation: blink 1.6s infinite; }
+@keyframes holo-in { from { opacity: 0; transform: translateY(12px) scaleY(.6); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@media (max-width: 520px) { .boot-actions .btn { width: 100%; } }
+.boot-lang { position: absolute; top: calc(14px + env(safe-area-inset-top)); right: 14px; z-index: 2; }

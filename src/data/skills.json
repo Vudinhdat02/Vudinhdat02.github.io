@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Languages",
+    "desc": "C# - .NET - Kotlin - Java - C/C++ - JavaScript - React - Next.js - Node.js"
+  },
+  {
+    "name": "IoT",
+    "desc": "ESP32 - STM32"
+  },
+  {
+    "name": "Platform",
+    "desc": "Android - Web"
+  },
+  {
+    "name": "Tools",
+    "desc": "VS Code, Git / GitHub, Figma, AI agent"
+  },
+  {
+    "name": "Soft skills",
+    "desc": "Giao tiếp, đàm phán, giải quyết vấn đề, tư duy phản biện"
+  }
+]

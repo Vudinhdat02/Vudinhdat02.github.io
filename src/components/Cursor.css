@@ -1,0 +1,38 @@
+.cursor-trail { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; }
+.cursor {
+  position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; opacity: 0;
+  width: 0; height: 0; transition: opacity .2s; will-change: transform;
+}
+.cursor > span { position: absolute; display: block; }
+.cursor-dot { width: 4px; height: 4px; left: -2px; top: -2px; background: var(--text-strong); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); }
+.cursor-ring {
+  width: 26px; height: 26px; left: -13px; top: -13px; border-radius: 50%;
+  border: 1px solid rgba(6,182,212,.7);
+  transition: transform .25s var(--ease), border-color .2s;
+}
+.cursor-line { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); transition: transform .25s var(--ease); }
+.cursor-line.h { height: 1px; width: 8px; top: 0; }
+.cursor-line.h.l { left: -24px; } .cursor-line.h.r { left: 16px; }
+.cursor-line.v { width: 1px; height: 8px; left: 0; }
+.cursor-line.v.t { top: -24px; } .cursor-line.v.b { top: 16px; }
+.cursor-corner { width: 8px; height: 8px; border: 0 solid var(--sky); opacity: 0; transition: all .25s var(--ease); }
+.cursor-corner.tl { left: -12px; top: -12px; border-left-width: 1.5px; border-top-width: 1.5px; }
+.cursor-corner.tr { left: 4px; top: -12px; border-right-width: 1.5px; border-top-width: 1.5px; }
+.cursor-corner.bl { left: -12px; top: 4px; border-left-width: 1.5px; border-bottom-width: 1.5px; }
+.cursor-corner.br { left: 4px; top: 4px; border-right-width: 1.5px; border-bottom-width: 1.5px; }
+.cursor-coord {
+  left: 20px; top: 18px; white-space: nowrap;
+  font: 500 11.5px/1 var(--font-mono); letter-spacing: .1em; color: rgba(56,189,248,.7);
+}
+.cursor.is-hover .cursor-ring { transform: scale(1.6) rotate(45deg); border-color: var(--sky); border-radius: 4px; }
+.cursor.is-hover .cursor-corner { opacity: 1; }
+.cursor.is-hover .cursor-corner.tl { transform: translate(-10px,-10px); }
+.cursor.is-hover .cursor-corner.tr { transform: translate(10px,-10px); }
+.cursor.is-hover .cursor-corner.bl { transform: translate(-10px,10px); }
+.cursor.is-hover .cursor-corner.br { transform: translate(10px,10px); }
+.cursor.is-hover .cursor-line.h.l { transform: translateX(-8px); }
+.cursor.is-hover .cursor-line.h.r { transform: translateX(8px); }
+.cursor.is-hover .cursor-line.v.t { transform: translateY(-8px); }
+.cursor.is-hover .cursor-line.v.b { transform: translateY(8px); }
+.cursor.is-down .cursor-ring { transform: scale(.6); border-color: var(--text-strong); }
+.cursor.is-text .cursor-ring { transform: scaleX(.15) scaleY(1.1); border-radius: 2px; }
