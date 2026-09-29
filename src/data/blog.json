@@ -10,7 +10,7 @@
     "ratios": [
       0.75
     ],
-    "layout": "auto",
+    "layout": "hero",
     "fit": "contain"
   },
   {
