@@ -1,29 +1,5 @@
 [
   {
-    "id": "mun0i767fn4b",
-    "title": "Một ngày bình thường của toii!",
-    "date": "30/09/2026",
-    "text": "",
-    "images": [
-      "/uploads/mot-ngay-binh-thuong-cua-toii-mun0pt0u.jpg",
-      "/uploads/mot-ngay-binh-thuong-cua-toii-mun0pw65.jpg",
-      "/uploads/mot-ngay-binh-thuong-cua-toii-mun0hp47.jpg",
-      "/uploads/mot-ngay-binh-thuong-cua-toii-mun0hv3o.jpg",
-      "/uploads/mot-ngay-binh-thuong-cua-toii-mun0hy2u.jpg",
-      "/uploads/mot-ngay-binh-thuong-cua-toii-mun0i2a6.jpg"
-    ],
-    "ratios": [
-      1.5,
-      1.5,
-      0.75,
-      0.75,
-      0.75,
-      0.75
-    ],
-    "layout": "film",
-    "fit": "contain"
-  },
-  {
     "id": "mumztvu6wxpq",
     "title": "Sinh viên năm thứ 5 và các bạn tân sinh viên",
     "date": "30/09/2026",
