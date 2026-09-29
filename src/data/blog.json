@@ -6,11 +6,13 @@
     "text": "Tâm lạnh như băng...",
     "images": [
       "/uploads/minh-van-cu-the-thoi-mumznosr.jpg",
-      "/uploads/minh-van-cu-the-thoi-mumznrd3.jpg"
+      "/uploads/minh-van-cu-the-thoi-mumznrd3.jpg",
+      "/uploads/minh-van-cu-the-thoi-mumzom4p.jpg"
     ],
     "ratios": [
       1.5,
-      1.5
+      1.5,
+      0.67
     ],
     "layout": "auto",
     "fit": "cover"
