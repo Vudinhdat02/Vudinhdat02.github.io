@@ -44,19 +44,5 @@
     ],
     "layout": "classic",
     "fit": "contain"
-  },
-  {
-    "id": "mumvgiq71hct",
-    "title": "Sinh Viên năm thứ 5 và các TSV",
-    "date": "29/09/2026",
-    "text": "Nhớ ngày nào 2022 bước vào đại học, thoáng chốc vèo một cái đã sắp hết đại học ròiiii...",
-    "images": [
-      "/uploads/sinh-vien-nam-thu-5-va-cac-tsv-mumvgipz.jpg"
-    ],
-    "ratios": [
-      0.67
-    ],
-    "layout": "auto",
-    "fit": "cover"
   }
 ]
