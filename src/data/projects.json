@@ -5,8 +5,8 @@
     "category": "MOBILE",
     "year": 2026,
     "hue": 38,
-    "featured": true,
-    "pinned": true,
+    "featured": false,
+    "pinned": false,
     "desc": {
       "vi": "Ứng dụng Android giám sát tài xế: phát hiện buồn ngủ và mất tập trung ngay trên thiết bị (nhắm mắt lâu, ngáp, quay đầu, rời khỏi camera) và cảnh báo bằng âm thanh, rung. Có hiệu chỉnh theo từng người, phát hiện va chạm bằng cảm biến + GPS, sao lưu đám mây và gợi ý an toàn bằng AI qua backend ASP.NET Core.",
       "en": "Android driver-monitoring app that detects fatigue and distraction on-device (eye closure, yawning, head turning, face absence) and warns with sound and vibration. Personal calibration, crash detection via motion sensors + GPS, cloud backup and AI safety insights through an ASP.NET Core backend."
