@@ -33,16 +33,12 @@
     "date": "30/09/2026",
     "text": "Loi nhoi cùng CLB Sinh Viên 5 Tốt ICTU",
     "images": [
-      "/uploads/minh-van-cu-the-thoi-mumznosr.jpg",
-      "/uploads/minh-van-cu-the-thoi-mumznrd3.jpg",
-      "/uploads/minh-van-cu-the-thoi-mumzsmr2.jpg"
+      "/uploads/minh-van-cu-the-thoi-mumznosr.jpg"
     ],
     "ratios": [
-      1.5,
-      1.5,
       1.5
     ],
-    "layout": "film",
+    "layout": "auto",
     "fit": "cover"
   },
   {
