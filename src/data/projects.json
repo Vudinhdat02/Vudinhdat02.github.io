@@ -32,10 +32,10 @@
     "year": 2026,
     "hue": 200,
     "featured": false,
-    "pinned": true,
+    "pinned": false,
     "desc": {
-      "en": "Custom UAV remote-control system on ESP32-S3: handheld transmitter + aircraft bridge over ESP-NOW with CRC-16 protected packets, OLED telemetry, flight modes (Stabilize, Alt Hold, Pos Hold), Return-to-Home and auto take-off/landing.",
-      "vi": "Hệ thống điều khiển UAV tự thiết kế trên ESP32-S3: tay điều khiển + bộ cầu nối trên máy bay qua ESP-NOW (gói tin có CRC-16), hiển thị telemetry trên OLED, các chế độ bay Stabilize / Alt Hold / Pos Hold, tự quay về và tự cất/hạ cánh."
+      "vi": "Hệ thống điều khiển UAV tự thiết kế trên ESP32-S3: tay điều khiển + bộ cầu nối trên máy bay qua ESP-NOW (gói tin có CRC-16), hiển thị telemetry trên OLED, các chế độ bay Stabilize / Alt Hold / Pos Hold, tự quay về và tự cất/hạ cánh.",
+      "en": "Custom UAV remote-control system on ESP32-S3: handheld transmitter + aircraft bridge over ESP-NOW with CRC-16 protected packets, OLED telemetry, flight modes (Stabilize, Alt Hold, Pos Hold), Return-to-Home and auto take-off/landing."
     },
     "tags": [
       "C/C++",
