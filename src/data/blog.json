@@ -75,7 +75,7 @@
     "ratios": [
       1.5
     ],
-    "layout": "classic",
+    "layout": "vertical",
     "fit": "cover",
     "hoverFx": "speed"
   },
