@@ -30,7 +30,7 @@
     "ratios": [
       0.67
     ],
-    "layout": "vertical",
+    "layout": "holo",
     "fit": "contain"
   },
   {
