@@ -58,7 +58,7 @@
     "ratios": [
       1.5
     ],
-    "layout": "magazine",
+    "layout": "hud",
     "fit": "cover"
   },
   {
