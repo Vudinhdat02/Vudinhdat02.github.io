@@ -32,7 +32,8 @@
       0.67
     ],
     "layout": "glass",
-    "fit": "contain"
+    "fit": "contain",
+    "titleFx": "scramble"
   },
   {
     "id": "mumzr8z7cue8",
