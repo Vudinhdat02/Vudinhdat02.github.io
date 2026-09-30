@@ -47,7 +47,7 @@
     "layout": "magazine",
     "fit": "contain",
     "hoverFx": "warp",
-    "titleFx": "fade"
+    "titleFx": "type"
   },
   {
     "id": "mumznu9xba3i",
