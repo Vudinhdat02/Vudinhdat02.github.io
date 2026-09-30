@@ -91,6 +91,7 @@
       0.75
     ],
     "layout": "classic",
-    "fit": "contain"
+    "fit": "contain",
+    "hoverFx": "speed"
   }
 ]
