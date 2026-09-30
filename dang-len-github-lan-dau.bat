@@ -4,6 +4,8 @@ REM  DUA WEBSITE LEN GITHUB LAN DAU  (chi can chay 1 lan)
 REM  Nhan dup vao file nay de chay.
 REM ==========================================================
 cd /d "%~dp0"
+REM xoa file khoa cua Git con sot lai (neu co), de Git chay duoc
+if exist ".git\index.lock" del /f /q ".git\index.lock"
 set REPO=Vudinhdat02.github.io
 set URL=https://github.com/Vudinhdat02/%REPO%.git
 

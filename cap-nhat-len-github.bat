@@ -4,6 +4,8 @@ REM  CAP NHAT WEBSITE LEN MANG  (chay moi khi ban them / sua noi dung tren may)
 REM  Nhan dup vao file nay de chay.
 REM ==========================================================
 cd /d "%~dp0"
+REM xoa file khoa cua Git con sot lai (neu co), de Git chay duoc
+if exist ".git\index.lock" del /f /q ".git\index.lock"
 if exist github-config (
   if not exist ".github\workflows" mkdir ".github\workflows"
   copy /y "github-config\workflows\deploy.yml" ".github\workflows\deploy.yml" >nul

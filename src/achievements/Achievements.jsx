@@ -77,7 +77,7 @@ function GridCard({ item, index, onZoom, tools }) {
   );
 }
 
-const VIEW_KEY = 'nexus.achView';
+const VIEW_KEY = 'vdd.achView';
 const readView = () => { try { return localStorage.getItem(VIEW_KEY) || 'timeline'; } catch { return 'timeline'; } };
 const VIEW_MODES = [
   { id: 'timeline', icon: 'flag' },

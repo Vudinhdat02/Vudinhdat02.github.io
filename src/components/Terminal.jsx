@@ -140,7 +140,7 @@ export default function Terminal({ onNavigate, isMobile }) {
             <div ref={outRef} className="term-out mono" role="log" aria-live="polite" onClick={() => inputRef.current?.focus()}>
               {lines.map((l, i) => (
                 <div key={i} className={`term-line k-${l.k}`}>
-                  {l.k === 'in' ? <><span className="term-ps">operator@nexus:~$</span> {l.t}</> : (l.key ? t(l.key) : l.t)}
+                  {l.k === 'in' ? <><span className="term-ps">guest@vudinhdat:~$</span> {l.t}</> : (l.key ? t(l.key) : l.t)}
                 </div>
               ))}
             </div>
@@ -157,7 +157,7 @@ export default function Terminal({ onNavigate, isMobile }) {
           <span className="mono hide-mobile">{t('term.label')}</span>
           <Icon name="chevronUp" size={14} className="term-chev" />
         </button>
-        <label className="term-prompt mono" htmlFor="term-input"><span className="term-ps">operator@nexus:~$</span></label>
+        <label className="term-prompt mono" htmlFor="term-input"><span className="term-ps">guest@vudinhdat:~$</span></label>
         <input
           id="term-input" ref={inputRef} className="term-input mono" value={input}
           onChange={(e) => setInput(e.target.value)} onKeyDown={onKeyDown}

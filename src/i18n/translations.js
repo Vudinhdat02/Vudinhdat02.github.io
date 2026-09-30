@@ -245,7 +245,7 @@ export const translations = {
     'app.swipe': 'VUỐT ⇆', 'app.loading': 'ĐANG GIẢI MÃ MODULE…',
 
     'boot.lines': [
-      'NEXUS//OS BIOS v4.2.0  ::  (c) 2026 NEXUS SYSTEMS',
+      'VU DINH DAT · PORTFOLIO v4.2.0  ::  (c) 2026 VU DINH DAT',
       'KHỞI TẠO HỆ THỐNG',
       'NẠP CÁC MODULE NHÂN',
       'KÍCH HOẠT MÀN HÌNH HOLOGRAM',

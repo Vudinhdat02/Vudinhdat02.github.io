@@ -15,7 +15,7 @@ import { GITHUB } from '../data/site';
 import { previews } from '../utils/asset';
 
 const DEV = import.meta.env.DEV;
-const TOKEN_KEY = 'nexus.gh.token';
+const TOKEN_KEY = 'vdd.gh.token';
 const API = 'https://api.github.com';
 
 /* ---------- sign-in state ---------- */

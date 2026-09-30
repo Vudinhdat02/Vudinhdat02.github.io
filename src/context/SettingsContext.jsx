@@ -18,21 +18,21 @@ const defaultLang = () => (navigator.language || '').toLowerCase().startsWith('v
 
 export function SettingsProvider({ children }) {
   const [lang, setLang] = useState(() => {
-    const l = read('nexus.lang', defaultLang());
+    const l = read('vdd.lang', defaultLang());
     document.documentElement.lang = l;
     return l;
   });
   const [theme, setTheme] = useState(() => {
-    const th = read('nexus.theme2', 'light'); // default = light; visitors can switch to dark
+    const th = read('vdd.theme2', 'light'); // default = light; visitors can switch to dark
     document.documentElement.dataset.theme = th;
     return th;
   });
 
-  useEffect(() => { document.documentElement.lang = lang; write('nexus.lang', lang); }, [lang]);
+  useEffect(() => { document.documentElement.lang = lang; write('vdd.lang', lang); }, [lang]);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#F4F7FB' : '#0B0F19');
-    write('nexus.theme2', theme);
+    write('vdd.theme2', theme);
   }, [theme]);
 
   /** UI string lookup: t('nav.projects'), t('proj.records', { a: 1, b: 8 }) */
