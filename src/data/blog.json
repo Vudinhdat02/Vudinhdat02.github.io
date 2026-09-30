@@ -77,7 +77,7 @@
     ],
     "layout": "shards",
     "fit": "cover",
-    "hoverFx": "auto"
+    "hoverFx": "scan"
   },
   {
     "id": "mumvmnfqe3wv",
