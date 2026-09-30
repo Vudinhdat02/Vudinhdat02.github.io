@@ -17,7 +17,8 @@
       1.5
     ],
     "layout": "film",
-    "fit": "contain"
+    "fit": "contain",
+    "titleFx": "scramble"
   },
   {
     "id": "mumztvu6wxpq",
