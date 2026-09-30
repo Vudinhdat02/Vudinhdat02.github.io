@@ -60,7 +60,7 @@
     ],
     "layout": "hud",
     "fit": "cover",
-    "hoverFx": "scan"
+    "hoverFx": "speed"
   },
   {
     "id": "mumzlrrfmyzw",
