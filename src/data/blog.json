@@ -64,7 +64,8 @@
     ],
     "layout": "hud",
     "fit": "cover",
-    "hoverFx": "shock"
+    "hoverFx": "shock",
+    "titleFx": "wave"
   },
   {
     "id": "mumzlrrfmyzw",
