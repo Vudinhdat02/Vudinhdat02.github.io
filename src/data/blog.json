@@ -76,7 +76,8 @@
       1.5
     ],
     "layout": "classic",
-    "fit": "cover"
+    "fit": "cover",
+    "hoverFx": "speed"
   },
   {
     "id": "mumvmnfqe3wv",
