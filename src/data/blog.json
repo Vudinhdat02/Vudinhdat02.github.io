@@ -80,7 +80,8 @@
     ],
     "layout": "shards",
     "fit": "cover",
-    "hoverFx": "neon"
+    "hoverFx": "neon",
+    "titleFx": "blade"
   },
   {
     "id": "mumvmnfqe3wv",
