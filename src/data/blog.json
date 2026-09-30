@@ -34,7 +34,7 @@
     "layout": "glass",
     "fit": "contain",
     "titleFx": "scramble",
-    "hoverFx": "scan"
+    "hoverFx": "auto"
   },
   {
     "id": "mumzr8z7cue8",
