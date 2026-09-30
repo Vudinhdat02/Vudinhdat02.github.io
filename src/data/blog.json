@@ -96,6 +96,7 @@
     ],
     "layout": "classic",
     "fit": "contain",
-    "hoverFx": "speed"
+    "hoverFx": "speed",
+    "titleFx": "katakana"
   }
 ]
