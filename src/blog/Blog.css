@@ -218,3 +218,12 @@
 /* a single polaroid sits in the flow — no empty space under it */
 .bl-pile.n1 { min-height: 0; padding: 24px 0 10px; }
 .bl-pile.n1 .bl-pola:nth-child(1) { position: relative; top: 0; left: 0; right: 0; margin: 0 auto; width: min(64%, 360px); max-width: none; }
+/* wireframes of the new layouts in the layout picker */
+.lp-hud { fill: none; stroke: #22d3ee; stroke-width: 1.4; }
+.lp-bubble { fill: #fff; stroke: #111; stroke-width: 1; }
+.lp-beam { fill: rgba(34,211,238,.25); }
+.lp-slash { stroke: #fff; stroke-width: 1.6; filter: drop-shadow(0 0 1px #38bdf8); }
+.lp-sun { fill: #ef4444; opacity: .85; }
+.lp-ring { fill: none; stroke: var(--sky); stroke-dasharray: 2 2; }
+.lp-glassbg { fill: var(--sky); opacity: .22; }
+.lp-mast { fill: #fff; opacity: .9; }

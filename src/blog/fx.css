@@ -1,0 +1,197 @@
+/* =====================================================================
+   BLOG — hover effects (choose per post) + title effects
+   A post gets class .hfx-<name> on its wrapper. Every photo inside the post is a <button>.
+   --mx / --my = pointer position inside the photo, --img = the photo itself (set by JS on hover).
+   ===================================================================== */
+@property --hfx-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --hfx-r { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --hfx-rr { syntax: '<length>'; inherits: false; initial-value: 0px; }
+
+/* reset the default (scan) layers for every other effect — kept at low priority with :where()
+   so each effect below (which names its .hfx-… class) always wins */
+:where(.blog-item:not(.hfx-scan)) .bl-post button::before,
+:where(.blog-item:not(.hfx-scan)) .bl-post button::after {
+  all: unset; content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; border-radius: inherit;
+  transition: opacity .35s var(--ease);
+}
+:where(.blog-item:not(.hfx-scan)) .bl-post button:hover::before,
+:where(.blog-item:not(.hfx-scan)) .bl-post button:hover::after { opacity: 0; animation: none; box-shadow: none; background: none; transform: none; }
+:where(.blog-item:not(.hfx-scan)) .bl-post .bl-pola::before,
+:where(.blog-item:not(.hfx-scan)) .bl-post .bl-pola::after { inset: 10px 10px 34px 10px; }
+.bl-post .bl-more::before, .bl-post .bl-more::after { display: none !important; }
+
+/* ---------- HOLOGRAM: cyan tint, rolling scanlines, ghost copy jitters beside ---------- */
+.hfx-hologram .bl-post button:hover img { filter: sepia(.35) hue-rotate(150deg) saturate(1.9) brightness(1.12); animation: hfx-flicker 2.4s steps(1) infinite; }
+.hfx-hologram .bl-post button:not(.bl-more)::before {
+  background: repeating-linear-gradient(0deg, rgba(34,211,238,.28) 0 1px, transparent 1px 3px); mix-blend-mode: screen;
+  animation: hfx-roll 1.4s linear infinite; }
+.hfx-hologram .bl-post button:not(.bl-more)::after {
+  background: var(--img) center / cover no-repeat; mix-blend-mode: screen; filter: hue-rotate(-70deg) saturate(2);
+  animation: hfx-jitter .22s steps(2) infinite; }
+.fit-contain.hfx-hologram .bl-post button::after { background-size: contain; }
+.hfx-hologram .bl-post button:hover::before { opacity: 1; }
+.hfx-hologram .bl-post button:hover::after { opacity: .38; }
+@keyframes hfx-roll { to { background-position: 0 36px; } }
+@keyframes hfx-jitter { 0% { transform: translate(4px, -2px); } 50% { transform: translate(-3px, 2px); } }
+@keyframes hfx-flicker { 0%, 100% { opacity: 1; } 7% { opacity: .7; } 9% { opacity: 1; } 52% { opacity: .85; } 54% { opacity: 1; } }
+
+/* ---------- GLITCH: the photo tears into shifted, colour-split slices ---------- */
+.hfx-glitch .bl-post button:hover img { filter: contrast(1.25) saturate(1.5); }
+.hfx-glitch .bl-post button:not(.bl-more)::before,
+.hfx-glitch .bl-post button:not(.bl-more)::after { background: var(--img) center / cover no-repeat; }
+.fit-contain.hfx-glitch .bl-post button::before, .fit-contain.hfx-glitch .bl-post button::after { background-size: contain; }
+.hfx-glitch .bl-post button:not(.bl-more)::before { filter: hue-rotate(90deg) saturate(3); mix-blend-mode: screen; }
+.hfx-glitch .bl-post button:not(.bl-more)::after { filter: hue-rotate(-120deg) saturate(3); mix-blend-mode: screen; }
+.hfx-glitch .bl-post button:hover::before { opacity: .9; animation: hfx-slice-a .8s steps(1) infinite; }
+.hfx-glitch .bl-post button:hover::after { opacity: .9; animation: hfx-slice-b .8s steps(1) infinite; }
+@keyframes hfx-slice-a {
+  0% { clip-path: inset(8% 0 78% 0); transform: translate(-14px, 0); } 20% { clip-path: inset(42% 0 40% 0); transform: translate(12px, 0); }
+  40% { clip-path: inset(70% 0 12% 0); transform: translate(-8px, 0); } 60% { clip-path: inset(20% 0 62% 0); transform: translate(16px, 0); }
+  80% { clip-path: inset(88% 0 2% 0); transform: translate(-6px, 0); } 100% { clip-path: inset(0 0 100% 0); } }
+@keyframes hfx-slice-b {
+  0% { clip-path: inset(60% 0 25% 0); transform: translate(10px, 2px); } 25% { clip-path: inset(5% 0 85% 0); transform: translate(-12px, -2px); }
+  50% { clip-path: inset(35% 0 50% 0); transform: translate(8px, 0); } 75% { clip-path: inset(78% 0 8% 0); transform: translate(-16px, 1px); }
+  100% { clip-path: inset(0 0 100% 0); } }
+
+/* ---------- WARP: jump to hyperspace — star streaks rush past, the photo lunges forward ---------- */
+.hfx-warp .bl-post button img { transition: scale 1s cubic-bezier(.2, .9, .1, 1), filter .6s; }
+.hfx-warp .bl-post button:hover img { scale: 1.28; filter: brightness(1.15) saturate(1.2); }
+.hfx-warp .bl-post button:not(.bl-more)::before {
+  background: repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 3.2deg, rgba(224,242,254,.95) 3.2deg 3.6deg);
+  -webkit-mask: radial-gradient(circle, transparent 16%, #000 62%); mask: radial-gradient(circle, transparent 16%, #000 62%); }
+.hfx-warp .bl-post button:hover::before { animation: hfx-warp .7s linear infinite; }
+.hfx-warp .bl-post button:not(.bl-more)::after { background: radial-gradient(circle, rgba(255,255,255,.95), rgba(56,189,248,.35) 30%, transparent 60%); }
+.hfx-warp .bl-post button:hover::after { animation: hfx-flash .6s ease-out; }
+@keyframes hfx-warp { 0% { transform: scale(.35) rotate(0); opacity: 0; } 30% { opacity: .95; } 100% { transform: scale(1.9) rotate(8deg); opacity: 0; } }
+@keyframes hfx-flash { 0% { opacity: .95; transform: scale(.3); } 100% { opacity: 0; transform: scale(1.6); } }
+
+/* ---------- ANIME SPEED LINES: impact flash, radial speed lines around the pointer, halftone punch ---------- */
+.hfx-speed .bl-post button:hover { animation: hfx-shake .32s; }
+.hfx-speed .bl-post button:hover img { scale: 1.12; filter: contrast(1.3) saturate(1.35); }
+.hfx-speed .bl-post button:not(.bl-more)::before {
+  background: repeating-conic-gradient(from 0deg at var(--mx) var(--my), transparent 0deg 5deg, rgba(10,10,10,.85) 5deg 5.5deg, transparent 5.5deg 8deg, rgba(255,255,255,.9) 8deg 8.3deg);
+  -webkit-mask: radial-gradient(circle at var(--mx) var(--my), transparent 24%, #000 62%); mask: radial-gradient(circle at var(--mx) var(--my), transparent 24%, #000 62%); }
+.hfx-speed .bl-post button:hover::before { opacity: 1; animation: hfx-lines .16s steps(2) infinite; }
+.hfx-speed .bl-post button:not(.bl-more)::after { background: #fff; }
+.hfx-speed .bl-post button:hover::after { animation: hfx-impact .35s ease-out; }
+@keyframes hfx-lines { 50% { transform: rotate(1.5deg) scale(1.03); } }
+@keyframes hfx-impact { 0% { opacity: .9; } 100% { opacity: 0; } }
+@keyframes hfx-shake { 0%, 100% { translate: 0 0; } 20% { translate: -6px 3px; } 40% { translate: 5px -4px; } 60% { translate: -4px -2px; } 80% { translate: 3px 3px; } }
+
+/* ---------- NEON: a rainbow energy line races around the frame, the photo glows ---------- */
+.hfx-neon .bl-post button:hover img { filter: saturate(1.45) brightness(1.08); }
+.hfx-neon .bl-post button:not(.bl-more)::before {
+  padding: 3px; background: conic-gradient(from var(--hfx-a), #22d3ee, #a855f7, #f43f5e, #fbbf24, #22d3ee);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); z-index: 4; }
+.hfx-neon .bl-post button:hover::before { opacity: 1; animation: hfx-spin 1.6s linear infinite; }
+.hfx-neon .bl-post button:not(.bl-more)::after { box-shadow: inset 0 0 34px rgba(168,85,247,.6), inset 0 0 70px rgba(34,211,238,.35); }
+.hfx-neon .bl-post button:hover::after { opacity: 1; }
+@keyframes hfx-spin { to { --hfx-a: 360deg; } }
+
+/* ---------- PORTAL: a ring opens from the pointer and reveals the photo in another dimension ---------- */
+.hfx-portal .bl-post button { transition: --hfx-r .9s cubic-bezier(.3, .7, .2, 1); }
+.hfx-portal .bl-post button:hover { --hfx-r: 1100px; }
+.hfx-portal .bl-post button:not(.bl-more)::before {
+  opacity: 1; clip-path: circle(var(--hfx-r) at var(--mx) var(--my)); }
+.hfx-portal .bl-post button:hover::before { backdrop-filter: hue-rotate(185deg) saturate(1.9) contrast(1.1); -webkit-backdrop-filter: hue-rotate(185deg) saturate(1.9) contrast(1.1); }
+.hfx-portal .bl-post button:not(.bl-more)::after {
+  opacity: 1; background: radial-gradient(circle at var(--mx) var(--my), transparent calc(var(--hfx-r) - 7px), rgba(255,255,255,.95) calc(var(--hfx-r) - 3px),
+    rgba(168,85,247,.9) var(--hfx-r), rgba(34,211,238,.5) calc(var(--hfx-r) + 6px), transparent calc(var(--hfx-r) + 12px)); }
+
+/* ---------- SHOCKWAVE: energy rings ripple out from the pointer ---------- */
+.hfx-shock .bl-post button:hover img { animation: hfx-bump .5s var(--ease); scale: 1.06; }
+.hfx-shock .bl-post button:not(.bl-more)::before,
+.hfx-shock .bl-post button:not(.bl-more)::after {
+  background: radial-gradient(circle at var(--mx) var(--my), transparent var(--hfx-rr), rgba(255,255,255,.9) calc(var(--hfx-rr) + 3px),
+    rgba(56,189,248,.7) calc(var(--hfx-rr) + 9px), transparent calc(var(--hfx-rr) + 18px)); mix-blend-mode: screen; }
+.hfx-shock .bl-post button:hover::before { opacity: 1; animation: hfx-ring 1.3s ease-out infinite; }
+.hfx-shock .bl-post button:hover::after { opacity: 1; animation: hfx-ring 1.3s .65s ease-out infinite; }
+@keyframes hfx-ring { 0% { --hfx-rr: 0px; opacity: 1; } 100% { --hfx-rr: 520px; opacity: 0; } }
+@keyframes hfx-bump { 0% { scale: 1; } 35% { scale: .95; } 100% { scale: 1.06; } }
+
+/* ---------- X-RAY SCOPE: a targeting lens follows the pointer and shows the photo in thermal vision ---------- */
+.hfx-xray .bl-post button:hover::before { backdrop-filter: invert(1) hue-rotate(180deg) contrast(1.35) saturate(2.2); -webkit-backdrop-filter: invert(1) hue-rotate(180deg) contrast(1.35) saturate(2.2); }
+.hfx-xray .bl-post button:not(.bl-more)::before {
+  -webkit-mask: radial-gradient(circle 110px at var(--mx) var(--my), #000 98%, transparent 100%); mask: radial-gradient(circle 110px at var(--mx) var(--my), #000 98%, transparent 100%); }
+.hfx-xray .bl-post button:not(.bl-more)::after {
+  background:
+    radial-gradient(circle 111px at var(--mx) var(--my), transparent 107px, rgba(34,211,238,.95) 108px 111px, transparent 112px),
+    radial-gradient(circle 4px at var(--mx) var(--my), #f43f5e 3px, transparent 4px),
+    linear-gradient(90deg, transparent calc(var(--mx) - 1px), rgba(34,211,238,.6) calc(var(--mx) - 1px) var(--mx), transparent var(--mx)),
+    linear-gradient(180deg, transparent calc(var(--my) - 1px), rgba(34,211,238,.6) calc(var(--my) - 1px) var(--my), transparent var(--my)); }
+.hfx-xray .bl-post button:hover::before, .hfx-xray .bl-post button:hover::after { opacity: 1; }
+.hfx-xray .bl-post button:hover img { filter: grayscale(.4) brightness(.85); }
+
+/* ---------- SAKURA: petals drift across the photo, soft pink bloom around the pointer ---------- */
+.hfx-sakura .bl-post button:hover img { filter: saturate(1.2) brightness(1.06) hue-rotate(-8deg); }
+.hfx-sakura .bl-post button:not(.bl-more)::before {
+  background:
+    radial-gradient(ellipse 7px 4px at 20% 15%, #f9a8d4 60%, transparent 72%), radial-gradient(ellipse 5px 3px at 70% 40%, #fbcfe8 60%, transparent 72%),
+    radial-gradient(ellipse 6px 4px at 45% 75%, #f472b6 55%, transparent 70%), radial-gradient(ellipse 4px 3px at 85% 85%, #fce7f3 60%, transparent 72%);
+  background-size: 140px 160px, 110px 130px, 170px 150px, 90px 120px; }
+.hfx-sakura .bl-post button:hover::before { opacity: 1; animation: hfx-petals 3.2s linear infinite; }
+.hfx-sakura .bl-post button:not(.bl-more)::after { background: radial-gradient(circle at var(--mx) var(--my), rgba(251,207,232,.55), transparent 55%); mix-blend-mode: screen; }
+.hfx-sakura .bl-post button:hover::after { opacity: 1; }
+@keyframes hfx-petals { to { background-position: 140px 320px, -110px 260px, 170px 300px, -90px 240px; } }
+
+@media (hover: none) {
+  .blog-item .bl-post button::before, .blog-item .bl-post button::after { display: none; }
+}
+
+/* =====================================================================
+   TITLE EFFECTS (.tfx-<name>; `.on` is added when the title scrolls into view)
+   ===================================================================== */
+.tfx-word { display: inline-block; white-space: nowrap; }
+.tfx-ch { display: inline-block; will-change: transform; }
+.tfx-caret { display: inline-block; width: .08em; height: .95em; margin-left: .06em; vertical-align: -.1em; background: var(--cyan); animation: blink .8s steps(1) infinite; }
+.blog-item:hover .tfx-wave .tfx-ch { animation: tfx-hop .5s calc(var(--i) * 30ms) var(--ease); }
+@keyframes tfx-hop { 40% { transform: translateY(-.28em); } }
+
+/* glitch — RGB split jolt on arrival and whenever the post is hovered */
+.tfx-glitch { position: relative; }
+.tfx-glitch .tfx-inner { opacity: 0; }
+.tfx-glitch.on .tfx-inner { opacity: 1; transition: opacity .1s .15s; }
+.tfx-glitch::before, .tfx-glitch::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.tfx-glitch::before { color: #f0f; } .tfx-glitch::after { color: #0ff; }
+.tfx-glitch.on::before, .blog-item:hover .tfx-glitch::before { animation: tfx-g1 .7s steps(2) 1; }
+.tfx-glitch.on::after, .blog-item:hover .tfx-glitch::after { animation: tfx-g2 .7s steps(2) 1; }
+@keyframes tfx-g1 { 0% { opacity: .9; clip-path: inset(0 0 60% 0); transform: translate(-4px, -1px); } 50% { clip-path: inset(50% 0 10% 0); transform: translate(4px, 1px); } 100% { opacity: 0; } }
+@keyframes tfx-g2 { 0% { opacity: .9; clip-path: inset(60% 0 0 0); transform: translate(4px, 1px); } 50% { clip-path: inset(10% 0 55% 0); transform: translate(-3px, -1px); } 100% { opacity: 0; } }
+
+/* neon — the sign flickers on and stays glowing */
+.tfx-neon .tfx-inner { opacity: 0; }
+.tfx-neon.on .tfx-inner { animation: tfx-neon 1.6s forwards; color: #fff;
+  text-shadow: 0 0 6px #22d3ee, 0 0 14px #22d3ee, 0 0 28px #a855f7, 0 0 42px #a855f7; }
+:root[data-theme="light"] .tfx-neon.on .tfx-inner { color: #0e7490; text-shadow: 0 0 10px rgba(34,211,238,.7), 0 0 22px rgba(168,85,247,.5) !important; }
+@keyframes tfx-neon { 0% { opacity: 0; } 10% { opacity: 1; } 14% { opacity: .1; } 22% { opacity: 1; } 26% { opacity: .2; } 34%, 100% { opacity: 1; } }
+
+/* blade — a sword slash crosses the line, the title is revealed behind it */
+.tfx-blade { position: relative; }
+.tfx-blade .tfx-inner { display: inline-block; clip-path: inset(0 100% 0 0); }
+.tfx-blade.on .tfx-inner { animation: tfx-cut .55s .15s cubic-bezier(.7, 0, .2, 1) forwards; }
+.tfx-blade::after { content: ''; position: absolute; left: -4%; top: 52%; width: 108%; height: 3px; transform: scaleX(0); transform-origin: left; pointer-events: none;
+  background: linear-gradient(90deg, transparent, #fff 15%, #fff 85%, transparent); box-shadow: 0 0 12px 3px rgba(56,189,248,.8); rotate: -3deg; }
+.tfx-blade.on::after { animation: tfx-slash .7s ease-out forwards; }
+@keyframes tfx-cut { to { clip-path: inset(0 0 0 0); } }
+@keyframes tfx-slash { 0% { transform: scaleX(0); opacity: 1; } 45% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+
+/* gradient — flowing rainbow ink */
+.tfx-gradient .tfx-inner { opacity: 0; color: transparent; -webkit-background-clip: text; background-clip: text;
+  background-image: linear-gradient(90deg, #06b6d4, #6366f1, #d946ef, #f59e0b, #06b6d4); background-size: 300% 100%; animation: tfx-flow 6s linear infinite; }
+.tfx-gradient.on .tfx-inner { opacity: 1; transition: opacity .6s; }
+@keyframes tfx-flow { to { background-position: 300% 0; } }
+
+/* ---------- pickers in the editor ---------- */
+.fx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.fx-opt { display: grid; gap: 2px; padding: 9px 10px; text-align: left; border-radius: 9px; border: 1.5px solid var(--line); background: rgb(var(--bg1-rgb) / .5);
+  transition: border-color .2s, background-color .2s; }
+.fx-opt b { font-size: 14px; color: var(--text-strong); }
+.fx-opt small { font-size: 12px; line-height: 1.3; color: var(--text-faint); }
+.fx-opt:hover { border-color: var(--line-strong); }
+.fx-opt.on { border-color: var(--cyan); background: rgba(6,182,212,.1); box-shadow: 0 0 0 1px var(--cyan); }
+.fx-preview { position: relative; margin-top: 10px; border-radius: 12px; overflow: hidden; border: 1px dashed var(--line-strong); }
+.fx-preview .bl-post { display: grid; grid-template-columns: 160px 1fr; gap: 14px; align-items: center; padding: 10px; }
+.fx-preview .bl-pic { height: 110px; border-radius: 8px; overflow: hidden; position: relative; }
+.fx-preview .bl-title { font-size: 20px; margin: 0; }
+.fx-preview small { display: block; margin-top: 4px; color: var(--text-faint); font-size: 12.5px; }

@@ -6,7 +6,7 @@ import Cursor from './components/Cursor';
 import TouchFeedback from './components/TouchFeedback';
 import BootSequence from './components/BootSequence';
 import HUDHeader, { VIEWS } from './components/HUDHeader';
-import Terminal from './components/Terminal';
+import CommandOrb from './components/CommandOrb';
 import SiteFooter from './components/SiteFooter';
 import AdminPanel from './admin/AdminPanel';
 import Dashboard from './sections/Dashboard';
@@ -212,7 +212,7 @@ export default function App() {
             <span className="sweep" />
           </div>
 
-          <Terminal onNavigate={navigate} isMobile={mobile} />
+          <CommandOrb onNavigate={navigate} />
         </motion.div>
       )}
       <AdminPanel />

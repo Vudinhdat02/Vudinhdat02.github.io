@@ -9,7 +9,10 @@ import { EditorModal, Field, ItemTools, MultiImagePicker, TextArea, move } from 
 import { asset } from '../utils/asset';
 import { useSettings } from '../context/SettingsContext';
 import { useSound } from '../context/SoundContext';
+import { EASE, FitCtx, ParallaxImg, Pic, Text, TitleFx, TitleFxCtx, TITLE_FX, inView } from './shared';
+import { VIEWS2 } from './layouts2';
 import './Blog.css';
+import './fx.css';
 
 /**
  * Personal blog / daily diary on the Dashboard.
@@ -17,12 +20,15 @@ import './Blog.css';
  * Add / edit on the page while running `npm run dev` → saved in src/data/blog.json, photos in public/uploads/.
  */
 
-const EASE = [0.22, 1, 0.36, 1];
 
 /** Hover light on photos: remember where the pointer is inside the photo (CSS does the rest). */
 const trackPhoto = (e) => {
   const el = e.target.closest?.('.bl-post button');
   if (!el) return;
+  if (!el.style.getPropertyValue('--img')) { // the photo itself, used by glitch / hologram layers
+    const img = el.querySelector('img');
+    if (img) el.style.setProperty('--img', `url("${img.currentSrc || img.src}")`);
+  }
   const r = el.getBoundingClientRect();
   el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
   el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
@@ -40,9 +46,29 @@ const LAYOUTS = [
   { id: 'curtain', min: 1, fits: (r) => r >= 0.95 },
   { id: 'mosaic', min: 2, fits: () => true },
   { id: 'film', min: 2, fits: (r) => r >= 0.9 },
+  { id: 'hud', min: 1, fits: (r) => r >= 1 },
+  { id: 'manga', min: 1, fits: () => true },
+  { id: 'holo', min: 1, fits: () => true },
+  { id: 'split', min: 1, fits: (r) => r >= 1.1 },
+  { id: 'deck', min: 1, fits: () => true },
+  { id: 'vertical', min: 1, fits: (r) => r >= 1.3 },
+  { id: 'orbit', min: 1, fits: () => true },
+  { id: 'glass', min: 1, fits: () => true },
+  { id: 'shards', min: 1, fits: (r) => r >= 1.1 },
+  { id: 'magazine', min: 1, fits: (r) => r <= 1.05 },
   { id: 'note', min: 0, fits: () => true },
 ];
-const ROTATION = ['hero', 'door', 'polaroid', 'curtain', 'mosaic', 'film', 'classic'];
+const ROTATION = ['hero', 'hud', 'door', 'manga', 'polaroid', 'holo', 'curtain', 'split', 'mosaic', 'orbit', 'film', 'vertical', 'deck', 'glass', 'shards', 'magazine', 'classic'];
+
+/** Hover effects ("chuyển cảnh khi di chuột") and the one each layout uses when set to Auto. */
+export const HOVER_FX = ['scan', 'hologram', 'glitch', 'warp', 'speed', 'neon', 'portal', 'shock', 'xray', 'sakura'];
+const AUTO_HFX = { hero: 'scan', door: 'portal', polaroid: 'sakura', curtain: 'shock', mosaic: 'warp', film: 'glitch', classic: 'scan',
+  hud: 'xray', manga: 'speed', holo: 'hologram', split: 'shock', deck: 'neon', vertical: 'sakura', orbit: 'portal', glass: 'warp',
+  shards: 'glitch', magazine: 'neon', note: 'scan', note2: 'scan' };
+const AUTO_TFX = { hero: 'split', door: 'wave', polaroid: 'type', curtain: 'fade', mosaic: 'gradient', film: 'blade', classic: 'fade',
+  hud: 'scramble', manga: 'blade', holo: 'glitch', split: 'blade', deck: 'wave', vertical: 'katakana', orbit: 'neon', glass: 'fade',
+  shards: 'scramble', magazine: 'split', note: 'type', note2: 'neon' };
+const pick = (v, map, layout) => (!v || v === 'auto' ? map[layout] || 'scan' : v);
 const byId = Object.fromEntries(LAYOUTS.map((l) => [l.id, l]));
 
 /** Can this post use that layout? (enough photos; for auto also the right photo shape) */
@@ -80,55 +106,10 @@ const measure = (src) => new Promise((res) => {
   img.src = src;
 });
 
-/** 'cover' = photos fill their frame (may crop) · 'contain' = whole photo always visible */
-const FitCtx = createContext('cover');
-
 const today = () => {
   const d = new Date();
   return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
 };
-
-/** The page scrolls inside <main id="main">, not the window. */
-function useStageScroll(target) {
-  const container = useRef(null);
-  useLayoutEffect(() => { container.current = document.getElementById('main'); }, []);
-  return useScroll({ target, container, offset: ['start end', 'end start'] });
-}
-
-/** Photo that drifts slightly while the page scrolls (transform only → smooth). */
-function ParallaxImg({ src, alt, strength = 40, onClick, className = '' }) {
-  const ref = useRef(null);
-  const reduced = useReducedMotion();
-  const contain = useContext(FitCtx) === 'contain';
-  const { scrollYProgress } = useStageScroll(ref);
-  const y = useTransform(scrollYProgress, [0, 1], [-strength, strength]);
-  return (
-    <button type="button" ref={ref} className={`bl-px ${className}`} onClick={onClick} data-hover>
-      <motion.img src={asset(src)} alt={alt} loading="lazy" style={reduced || contain ? undefined : { y, scale: 1.14 }} />
-    </button>
-  );
-}
-
-function Text({ post, align }) {
-  const { t, tr } = useSettings();
-  const text = tr(post.text || '');
-  const long = text.length > 420 || text.split('\n').length > 8;
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={`bl-text ${align || ''}`}>
-      {post.date && <span className="bl-date mono"><Icon name="flag" size={12} /> {tr(post.date)}</span>}
-      {post.title && <h3 className="bl-title display">{tr(post.title)}</h3>}
-      {text && <p className={`bl-body ${long && !open ? 'clamped' : ''}`}>{text}</p>}
-      {long && (
-        <button type="button" className="bl-more mono" onClick={() => setOpen(!open)}>
-          {open ? t('blog.less') : t('blog.more')} <Icon name={open ? 'chevronUp' : 'chevronR'} size={14} />
-        </button>
-      )}
-    </div>
-  );
-}
-
-const inView = { initial: 'hidden', whileInView: 'show', viewport: { once: true, amount: 0.22 } };
 
 /* ---------- the layouts ---------- */
 
@@ -213,13 +194,15 @@ function Curtain({ post, zoom }) {
         <motion.span className="bl-date mono" variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { delay: 0.2 } } }}>
           <Icon name="flag" size={12} /> {tr(post.date || '')}
         </motion.span>
-        <h3 className="bl-title display bl-words" aria-label={tr(post.title)}>
-          {words.map((w, i) => (
-            <span key={i} className="bl-word-mask" aria-hidden="true">
-              <motion.span variants={{ hidden: { y: '110%' }, show: { y: 0, transition: { duration: 0.7, ease: EASE, delay: 0.3 + i * 0.06 } } }}>{w}</motion.span>
-            </span>
-          ))}
-        </h3>
+        {post.titleFx && post.titleFx !== 'auto' ? <TitleFx text={tr(post.title)} /> : (
+          <h3 className="bl-title display bl-words" aria-label={tr(post.title)}>
+            {words.map((w, i) => (
+              <span key={i} className="bl-word-mask" aria-hidden="true">
+                <motion.span variants={{ hidden: { y: '110%' }, show: { y: 0, transition: { duration: 0.7, ease: EASE, delay: 0.3 + i * 0.06 } } }}>{w}</motion.span>
+              </span>
+            ))}
+          </h3>
+        )}
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE, delay: 0.55 } } }}>
           <Text post={{ ...post, title: '', date: '' }} />
         </motion.div>
@@ -325,7 +308,7 @@ function Classic({ post, zoom }) {
   );
 }
 
-const VIEWS = { classic: Classic, hero: Hero, door: Door, polaroid: Polaroid, curtain: Curtain, mosaic: Mosaic, film: Film };
+const VIEWS = { ...VIEWS2, classic: Classic, hero: Hero, door: Door, polaroid: Polaroid, curtain: Curtain, mosaic: Mosaic, film: Film };
 
 /* ---------- section + editor ---------- */
 
@@ -344,7 +327,49 @@ const SKETCH = {
   mosaic: <>{T(16, 3, 32, 1)}{P(4, 9, 28, 28, 'a')}{P(34, 9, 26, 13, 'b')}{P(34, 24, 12, 13, 'c')}{P(48, 24, 12, 13, 'd')}</>,
   film: <><rect x="2" y="5" width="60" height="18" rx="1" className="lp-strip" />{P(5, 8, 17, 12, 'a')}{P(24, 8, 17, 12, 'b')}{P(43, 8, 17, 12, 'c')}{T(4, 28, 40, 2)}</>,
   note: <><rect x="10" y="6" width="44" height="28" rx="3" className="lp-card" />{T(15, 12, 34, 4)}</>,
+  hud: <>{P(3, 5, 36, 26, 'a')}<path d="M3 11V5h6M33 5h6v6M3 25v6h6M33 31h6v-6" className="lp-hud" /><circle cx="21" cy="18" r="4" className="lp-hud" />{T(44, 10, 17, 4)}</>,
+  manga: <><rect x="2" y="3" width="60" height="34" className="lp-card" /><path d="M4 5h30l-4 30H4z" className="lp-photo" /><path d="M36 5h24v14H34z" className="lp-photo" /><path d="M33 21h27v14H31z" className="lp-photo" /><ellipse cx="46" cy="12" rx="11" ry="6" className="lp-bubble" /></>,
+  holo: <><path d="M26 34 12 6h40L38 34z" className="lp-beam" />{P(18, 5, 28, 18, 'a')}<ellipse cx="32" cy="35" rx="10" ry="2.5" className="lp-panel" /></>,
+  split: <><path d="M3 4h34l-10 22H3z" className="lp-photo" /><path d="M39 4h22v22H29z" className="lp-photo" /><path d="M40 2 26 28" className="lp-slash" />{T(4, 30, 40, 2)}</>,
+  deck: <><g transform="skewX(-12)">{P(14, 16, 22, 16, 'c')}{P(18, 11, 22, 16, 'b')}{P(22, 6, 22, 16, 'a')}</g>{T(46, 12, 15, 4)}</>,
+  vertical: <>{P(3, 4, 58, 26, 'a')}<circle cx="50" cy="11" r="5" className="lp-sun" /><rect x="40" y="7" width="3" height="20" className="lp-line" /><rect x="35" y="7" width="3" height="14" className="lp-line" />{T(4, 33, 30, 1)}</>,
+  orbit: <><circle cx="18" cy="20" r="15" className="lp-ring" /><circle cx="18" cy="20" r="9" className="lp-photo" /><circle cx="18" cy="5" r="3" className="lp-photo" /><circle cx="31" cy="27" r="3" className="lp-photo" />{T(38, 12, 23, 4)}</>,
+  glass: <><rect x="2" y="3" width="60" height="34" rx="4" className="lp-glassbg" />{P(7, 7, 20, 26, 'a')}<rect x="31" y="9" width="27" height="22" rx="3" className="lp-card" />{T(34, 13, 20, 3)}</>,
+  shards: <>{[0, 1, 2, 3].map((r) => [0, 1, 2, 3, 4, 5].map((c) => <rect key={`${r}${c}`} x={3 + c * 6.2} y={5 + r * 7.2} width="5.4" height="6.4" className="lp-photo" style={{ opacity: 0.35 + ((r * 6 + c) * 37 % 10) / 16 }} />))}{T(44, 12, 17, 4)}</>,
+  magazine: <>{P(4, 3, 24, 34, 'a')}<rect x="6" y="6" width="20" height="4" className="lp-mast" />{T(34, 8, 26, 5)}</>,
 };
+
+/** Grid of choices (hover effects / title effects) with a short hint under each name. */
+function FxGrid({ ids, value, onChange, prefix }) {
+  const { t } = useSettings();
+  return (
+    <div className="fx-grid" role="radiogroup">
+      {['auto', ...ids].map((id) => (
+        <button type="button" key={id} role="radio" aria-checked={value === id} className={`fx-opt ${value === id ? 'on' : ''}`} onClick={() => onChange(id)}>
+          <b>{t(`${prefix}.${id}`)}</b><small>{t(`${prefix}h.${id}`)}</small>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** Live preview in the editor: hover the photo to try the effect, the title replays when you pick a new one. */
+function FxPreview({ image, title, layout, hoverFx, titleFx }) {
+  const { t } = useSettings();
+  const h = pick(hoverFx, AUTO_HFX, layout);
+  const tf = !titleFx || titleFx === 'auto' ? AUTO_TFX[layout] || 'fade' : titleFx;
+  return (
+    <div className={`fx-preview blog-item hfx-${h}`} onPointerMove={trackPhoto}>
+      <div className="bl-post">
+        {image ? <Pic src={image} onClick={() => {}} /> : <span />}
+        <div>
+          <TitleFxCtx.Provider value={tf}><TitleFx key={`${tf}|${title}`} text={title || t('blog.fTitlePh')} /></TitleFxCtx.Provider>
+          <small>{t('blog.previewHint')}</small>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function LayoutPicker({ value, count, onChange }) {
   const { t } = useSettings();
@@ -367,7 +392,7 @@ function LayoutPicker({ value, count, onChange }) {
   );
 }
 
-const EMPTY = { index: -1, title: '', date: '', text: '', images: [], layout: 'auto', fit: 'cover' };
+const EMPTY = { index: -1, title: '', date: '', text: '', images: [], layout: 'auto', fit: 'cover', hoverFx: 'auto', titleFx: 'auto' };
 
 export default function Blog() {
   const { t, tr } = useSettings();
@@ -378,6 +403,30 @@ export default function Blog() {
   const [form, setForm] = useState(null);
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
+  // "Quick jump" asks to show a post: make sure it is rendered, then scroll to it
+  useEffect(() => {
+    const onReveal = (e) => {
+      const idx = items.findIndex((p) => p.id === e.detail);
+      if (idx < 0) return;
+      setLimit((l) => Math.max(l, idx + 1));
+      setTimeout(() => {
+        const el = document.querySelector(`[data-post-id="${e.detail}"]`);
+        const main = document.getElementById('main');
+        if (el && main) main.scrollTo({ top: el.getBoundingClientRect().top + main.scrollTop - 90, behavior: 'smooth' });
+      }, 250);
+    };
+    window.addEventListener('blog:reveal', onReveal);
+    return () => window.removeEventListener('blog:reveal', onReveal);
+  }, [items]);
+  // preview of a photo picked in the editor but not uploaded yet
+  const firstFile = form?.images?.[0]?.file;
+  const [formPreview, setFormPreview] = useState('');
+  useEffect(() => {
+    if (!firstFile) { setFormPreview(''); return undefined; }
+    const u = URL.createObjectURL(firstFile);
+    setFormPreview(u);
+    return () => URL.revokeObjectURL(u);
+  }, [firstFile]);
 
   // posts saved before photo shapes were recorded: measure them once so "auto" can avoid bad crops
   const [measured, setMeasured] = useState({});
@@ -402,7 +451,7 @@ export default function Blog() {
   const openEdit = (i) => {
     const p = items[i]; setError('');
     setForm({ index: i, title: tr(p.title), date: tr(p.date || ''), text: tr(p.text || ''), images: (p.images || []).map((url) => ({ url })),
-      layout: p.layout || 'auto', fit: p.fit || 'cover' });
+      layout: p.layout || 'auto', fit: p.fit || 'cover', hoverFx: p.hoverFx || 'auto', titleFx: p.titleFx || 'auto' });
   };
 
   const save = async () => {
@@ -416,7 +465,7 @@ export default function Blog() {
       const ratios = await Promise.all(images.map((u) => measure(asset(u))));
       const prev = form.index >= 0 ? items[form.index] : null;
       const layout = canUse({ images }, form.layout, false) ? form.layout : 'auto';
-      const entry = { id: prev?.id || newId(), title: form.title.trim(), date: form.date.trim(), text: form.text.trim(), images, ratios, layout, fit: form.fit };
+      const entry = { id: prev?.id || newId(), title: form.title.trim(), date: form.date.trim(), text: form.text.trim(), images, ratios, layout, fit: form.fit, hoverFx: form.hoverFx, titleFx: form.titleFx };
       const next = prev ? items.map((x, i) => (i === form.index ? entry : x)) : [entry, ...items]; // newest on top
       if (!(await commit(next))) throw new Error(status.error || 'Save failed');
       (prev?.images || []).filter((u) => !images.includes(u)).forEach(removeUpload);
@@ -465,9 +514,12 @@ export default function Blog() {
           const View = VIEWS[layout];
           const z = (k) => { setZoom({ post, index: k }); play('open'); };
           return (
-            <div key={`${post.id || i}-${layout}-${post.fit || 'cover'}`} className={`blog-item fit-${post.fit || 'cover'} ${EDIT_MODE ? 'editable' : ''}`}>
+            <div key={`${post.id || i}-${layout}-${post.fit || 'cover'}-${post.titleFx || 'auto'}`} data-post-id={post.id}
+              className={`blog-item fit-${post.fit || 'cover'} hfx-${pick(post.hoverFx, AUTO_HFX, layout)} ${EDIT_MODE ? 'editable' : ''}`}>
               <FitCtx.Provider value={post.fit || 'cover'}>
-                {View ? <View post={post} zoom={z} /> : <Note post={post} variant={layout} />}
+                <TitleFxCtx.Provider value={!post.titleFx || post.titleFx === 'auto' ? AUTO_TFX[layout] || 'fade' : post.titleFx}>
+                  {View ? <View post={post} zoom={z} /> : <Note post={post} variant={layout} />}
+                </TitleFxCtx.Provider>
               </FitCtx.Provider>
               {EDIT_MODE && (
                 <ItemTools first={i === 0} last={i === items.length - 1}
@@ -480,6 +532,20 @@ export default function Blog() {
                       {LAYOUTS.map((L) => (
                         <option key={L.id} value={L.id} disabled={(post.images || []).length < L.min}>{t(`blog.l.${L.id}`)}</option>
                       ))}
+                    </select>
+                  </label>
+                  {(post.images || []).length > 0 && (
+                    <label className="bl-switch mono">
+                      {t('blog.hover')}
+                      <select value={post.hoverFx || 'auto'} onChange={(e) => patch(i, { hoverFx: e.target.value })}>
+                        {['auto', ...HOVER_FX].map((id) => <option key={id} value={id}>{id === 'auto' ? `${t('blog.hfx.auto')} → ${t(`blog.hfx.${AUTO_HFX[layout] || 'scan'}`)}` : t(`blog.hfx.${id}`)}</option>)}
+                      </select>
+                    </label>
+                  )}
+                  <label className="bl-switch mono">
+                    {t('blog.titleFx')}
+                    <select value={post.titleFx || 'auto'} onChange={(e) => patch(i, { titleFx: e.target.value })}>
+                      {['auto', ...TITLE_FX].map((id) => <option key={id} value={id}>{id === 'auto' ? `${t('blog.tfx.auto')} → ${t(`blog.tfx.${AUTO_TFX[layout] || 'fade'}`)}` : t(`blog.tfx.${id}`)}</option>)}
                     </select>
                   </label>
                   {(post.images || []).length > 0 && (
@@ -528,6 +594,18 @@ export default function Blog() {
               <span className="ed-label">{t('blog.fLayout')}</span>
               <LayoutPicker value={form.layout} count={form.images.length} onChange={(layout) => setForm({ ...form, layout })} />
               <span className="ed-hint">{t('blog.fLayoutHint')}</span>
+            </div>
+            {form.images.length > 0 && (
+              <div className="ed-field">
+                <span className="ed-label">{t('blog.fHover')}</span>
+                <FxGrid ids={HOVER_FX} value={form.hoverFx} onChange={(hoverFx) => setForm({ ...form, hoverFx })} prefix="blog.hfx" />
+              </div>
+            )}
+            <div className="ed-field">
+              <span className="ed-label">{t('blog.fTitleFx')}</span>
+              <FxGrid ids={TITLE_FX} value={form.titleFx} onChange={(titleFx) => setForm({ ...form, titleFx })} prefix="blog.tfx" />
+              <FxPreview image={form.images[0] ? (form.images[0].file ? formPreview : form.images[0].url) : ''} title={form.title}
+                layout={form.layout === 'auto' ? 'classic' : form.layout} hoverFx={form.hoverFx} titleFx={form.titleFx} />
             </div>
             {form.images.length > 0 && (
               <label className="ed-check">

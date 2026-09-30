@@ -1,0 +1,54 @@
+/* ============ command orb (replaces the old terminal bar) ============ */
+.orb { position: fixed; z-index: 58; right: 22px; bottom: 22px; width: 58px; height: 58px; padding: 0; border: 0; border-radius: 50%;
+  display: grid; place-items: center; background: none; cursor: pointer; }
+.orb-core { position: relative; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: #fff;
+  background: radial-gradient(circle at 35% 30%, #67e8f9, #0891b2 55%, #0c4a6e); box-shadow: 0 0 0 2px rgb(var(--bg1-rgb)), 0 0 18px rgba(6,182,212,.7), inset 0 -4px 10px rgba(0,0,0,.3);
+  transition: transform .35s var(--ease); animation: orb-breathe 3.2s ease-in-out infinite; }
+.orb:hover .orb-core { transform: scale(1.08) rotate(-8deg); }
+.orb.open .orb-core { background: radial-gradient(circle at 35% 30%, #fda4af, #e11d48 60%, #881337); box-shadow: 0 0 0 2px rgb(var(--bg1-rgb)), 0 0 18px rgba(244,63,94,.7); animation: none; }
+@keyframes orb-breathe { 50% { box-shadow: 0 0 0 2px rgb(var(--bg1-rgb)), 0 0 30px rgba(6,182,212,.95), inset 0 -4px 10px rgba(0,0,0,.3); } }
+.orb-ring { position: absolute; inset: 0; border-radius: 50%; border: 1.5px dashed rgba(6,182,212,.7); animation: spin 9s linear infinite; pointer-events: none; }
+.orb-ring.r2 { inset: -7px; border: 1px solid transparent; border-top-color: rgba(168,85,247,.8); border-bottom-color: rgba(6,182,212,.6); animation-duration: 3.5s; animation-direction: reverse; }
+.orb-sat { position: absolute; inset: -12px; animation: spin 5s linear infinite; pointer-events: none; }
+.orb-sat i { position: absolute; top: 0; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 10px #fbbf24; }
+.orb-tip { position: absolute; right: 70px; top: 50%; translate: 0 -50%; white-space: nowrap; font-size: 12.5px; padding: 6px 10px; border-radius: 8px;
+  color: var(--text); background: rgb(var(--bg1-rgb) / .95); border: 1px solid var(--line-strong); box-shadow: 0 8px 20px rgb(var(--shadow-rgb) / .15);
+  opacity: 0; transform: translateX(10px); transition: opacity .25s, transform .25s var(--ease); pointer-events: none; }
+.orb:hover .orb-tip { opacity: 1; transform: none; }
+.orb.open .orb-tip { display: none; }
+kbd { display: inline-block; min-width: 20px; padding: 1px 5px; margin: 0 1px; border-radius: 4px; font: 600 11px var(--font-mono); text-align: center;
+  color: var(--text-dim); border: 1px solid var(--line-strong); border-bottom-width: 2px; background: rgb(var(--bg0-rgb) / .6); }
+
+.orb-back { position: fixed; inset: 0; z-index: 57; background: rgb(var(--bg0-rgb) / .55); display: flex; align-items: flex-end; justify-content: flex-end;
+  padding: 0 22px 94px; }
+.orb-panel { position: relative; width: min(560px, 100%); max-height: min(70vh, 620px); display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 18px; border: 1px solid var(--line-strong); background: var(--panel-bg); transform-origin: 100% 100%;
+  box-shadow: 0 30px 80px rgb(var(--shadow-rgb) / .35), 0 0 0 1px rgba(6,182,212,.15), 0 0 40px rgba(6,182,212,.15); }
+.orb-scan { position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none; z-index: 2;
+  background: linear-gradient(90deg, transparent, var(--cyan), #a855f7, transparent); animation: orb-scan 2.6s linear infinite; }
+@keyframes orb-scan { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.orb-search { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--line); color: var(--cyan); }
+.orb-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 17px; color: var(--text-strong); }
+.orb-search input::placeholder { color: var(--text-faint); }
+.orb-list { list-style: none; margin: 0; padding: 8px; overflow-y: auto; }
+.orb-group { padding: 10px 10px 4px; font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-faint); }
+.orb-item { width: 100%; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 10px; text-align: left; color: var(--text);
+  border: 1px solid transparent; transition: background-color .15s, border-color .15s; }
+.orb-item img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; flex: 0 0 auto; background: var(--media-bg); }
+.orb-ic { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; flex: 0 0 auto; color: var(--cyan); background: rgba(6,182,212,.1); border: 1px solid var(--line); }
+.orb-label { flex: 1; min-width: 0; font-weight: 600; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.orb-hint { font-size: 12px; color: var(--text-faint); white-space: nowrap; max-width: 40%; overflow: hidden; text-overflow: ellipsis; }
+.orb-go { color: var(--text-faint); opacity: 0; transform: translateX(-4px); transition: all .2s; }
+.orb-item.on { background: rgba(6,182,212,.12); border-color: rgba(6,182,212,.45); }
+.orb-item.on .orb-go { opacity: 1; transform: none; color: var(--cyan); }
+.orb-empty { padding: 20px; text-align: center; }
+.orb-foot { display: flex; flex-wrap: wrap; gap: 14px; padding: 10px 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-faint); }
+
+@media (max-width: 760px) {
+  .orb { right: 14px; bottom: calc(78px + env(safe-area-inset-bottom)); width: 52px; height: 52px; }
+  .orb-core { width: 40px; height: 40px; }
+  .orb-tip { display: none; }
+  .orb-back { align-items: flex-start; padding: calc(var(--hud-h) + 10px) 10px 0; }
+  .orb-panel { max-height: calc(100dvh - var(--hud-h) - 160px); transform-origin: 100% 0; }
+  .orb-foot { display: none; }
+}

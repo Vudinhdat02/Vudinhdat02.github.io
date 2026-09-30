@@ -1,7 +1,7 @@
 .os { position: fixed; inset: 0; z-index: 2; }
 .stage {
   position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden;
-  padding: calc(var(--hud-h) + env(safe-area-inset-top) + 20px) 24px calc(var(--term-h) + 44px);
+  padding: calc(var(--hud-h) + env(safe-area-inset-top) + 20px) 24px 40px;
   scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
 }
 .stage-inner { max-width: 1320px; margin: 0 auto; }

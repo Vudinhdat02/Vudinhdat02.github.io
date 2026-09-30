@@ -23,3 +23,7 @@ ma truy cap*
 *.pat
 *mat-khau*
 *password*
+
+# cong cu tren may (file .bat) — chi dung tren may, khong dua len GitHub
+cong-cu/
+*.bat
