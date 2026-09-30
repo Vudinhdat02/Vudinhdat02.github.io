@@ -44,7 +44,7 @@
     "ratios": [
       0.75
     ],
-    "layout": "holo",
+    "layout": "orbit",
     "fit": "contain"
   },
   {
