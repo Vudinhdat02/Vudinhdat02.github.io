@@ -45,7 +45,8 @@
       0.75
     ],
     "layout": "magazine",
-    "fit": "contain"
+    "fit": "contain",
+    "hoverFx": "glitch"
   },
   {
     "id": "mumznu9xba3i",
