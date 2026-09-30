@@ -63,7 +63,7 @@
     "ratios": [
       1.5
     ],
-    "layout": "manga",
+    "layout": "holo",
     "fit": "cover",
     "hoverFx": "shock",
     "titleFx": "wave"
