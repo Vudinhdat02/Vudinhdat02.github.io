@@ -59,7 +59,8 @@
       1.5
     ],
     "layout": "hud",
-    "fit": "cover"
+    "fit": "cover",
+    "hoverFx": "scan"
   },
   {
     "id": "mumzlrrfmyzw",
