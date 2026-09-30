@@ -44,7 +44,7 @@
     "ratios": [
       0.75
     ],
-    "layout": "shards",
+    "layout": "magazine",
     "fit": "contain"
   },
   {
