@@ -3,7 +3,7 @@
     "id": "mun0xfjhqieh",
     "title": "CLB Sinh Viên 5 Tốt ICTU",
     "date": "30/09/2026",
-    "text": "Một phần thanh xuân của tôi, nơi tôi gắn bó 3/5 quãng đường sinh viên của mình!",
+    "text": "",
     "images": [
       "/uploads/clb-sinh-vien-5-tot-ictu-mun0x2h4.jpg",
       "/uploads/clb-sinh-vien-5-tot-ictu-mun0x6o6.jpg",
@@ -18,6 +18,7 @@
     ],
     "layout": "film",
     "fit": "contain",
+    "hoverFx": "auto",
     "titleFx": "split"
   },
   {
