@@ -13,7 +13,7 @@
     "layout": "classic",
     "fit": "cover",
     "hoverFx": "shock",
-    "titleFx": "auto"
+    "titleFx": "fade"
   },
   {
     "id": "mun0xfjhqieh",
