@@ -11,7 +11,7 @@
       0.75
     ],
     "layout": "classic",
-    "fit": "cover",
+    "fit": "contain",
     "hoverFx": "shock",
     "titleFx": "type"
   },
