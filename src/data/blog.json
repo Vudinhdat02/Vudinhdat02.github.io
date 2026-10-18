@@ -64,7 +64,7 @@
     "ratios": [
       0.75
     ],
-    "layout": "magazine",
+    "layout": "orbit",
     "fit": "contain",
     "hoverFx": "warp",
     "titleFx": "neon"
