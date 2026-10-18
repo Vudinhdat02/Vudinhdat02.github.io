@@ -64,7 +64,7 @@
     "ratios": [
       0.75
     ],
-    "layout": "shards",
+    "layout": "glass",
     "fit": "contain",
     "hoverFx": "warp",
     "titleFx": "neon"
