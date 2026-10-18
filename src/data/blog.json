@@ -1,5 +1,21 @@
 [
   {
+    "id": "mvd8pc79zwbd",
+    "title": "1 ngày vivu",
+    "date": "18/10/2026",
+    "text": "Cuộc sống mà, làm gì có lựa chọn\nNắng chiếu tới ai thì người đó đen...",
+    "images": [
+      "/uploads/1-ngay-vivu-mvd8p9m9.jpg"
+    ],
+    "ratios": [
+      0.75
+    ],
+    "layout": "classic",
+    "fit": "cover",
+    "hoverFx": "auto",
+    "titleFx": "auto"
+  },
+  {
     "id": "mun0xfjhqieh",
     "title": "CLB Sinh Viên 5 Tốt ICTU",
     "date": "30/09/2026",
