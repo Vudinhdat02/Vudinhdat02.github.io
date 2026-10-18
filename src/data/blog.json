@@ -64,7 +64,7 @@
     "ratios": [
       0.75
     ],
-    "layout": "split",
+    "layout": "manga",
     "fit": "contain",
     "hoverFx": "warp",
     "titleFx": "neon"
